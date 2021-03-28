@@ -22,7 +22,7 @@
 
 - [VuePress搭建技术网站与个人博客](https://www.jianshu.com/p/37509da5a020)
 - [博客地址](https://nan-gong.github.io/tech/interview)
-- https://nan-gong.github.io/)
+- [Intro to VuePress 1.x](https://ulivz.com/2019/06/09/intro-to-vuepress-1-x/)
 - [VuePress官网](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.vuepress.cn%2F)
 - 一些例子：
   - [VuePress 手摸手教你搭建一个类Vue文档风格的技术文档/博客](https://segmentfault.com/a/1190000016333850)
