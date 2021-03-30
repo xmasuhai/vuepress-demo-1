@@ -16,15 +16,19 @@
 
 ### Vue 2.x
 
+#### Vue 动画
+
+- [文章链接](/tech/Vue2.x/VueAnimation/)
+
+#### Vue全家桶与生态
+
 > 参考链接
 
 - [vue 前端项目技术选型、开发工具、周边生态](https://segmentfault.com/a/1190000017480921)
 
-#### Vue全家桶与生态
-
 ##### VuePress
 
-- [文章链接](/tech/VuePress/)
+- [文章链接](/tech/Vue2.x/VuePress/)
 
 ---
 ---

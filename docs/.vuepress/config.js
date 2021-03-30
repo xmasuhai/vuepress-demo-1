@@ -8,7 +8,7 @@ module.exports = {
   base: '/vuepress-demo-1/',
   // 代码块显示行号
   markdown: {
-    lineNumbers: false
+    lineNumbers: true
   },
   themeConfig: {
     // 左上角logo
@@ -16,7 +16,7 @@ module.exports = {
     // 导航栏配置
     nav: [
       {text: '首页', link: '/' },
-      {text: '技术文档', link: '/hierarchy/'},
+      {text: '前端体系目录', link: '/hierarchy/'},
       {text: '面经', link: '/interview/'},
       {text: '我的博客', link: 'http://xmasuhai.xyz'},
     ],
@@ -26,5 +26,9 @@ module.exports = {
     // 文档更新时间：每个文件git最后提交的时间
     lastUpdated: 'Last Updated',
   },
+  plugins: [
+    'vuepress-plugin-element-tabs',
+    '@vuepress/back-to-top',
+  ],
   serviceWorker: true,
 }

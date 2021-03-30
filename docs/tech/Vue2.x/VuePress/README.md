@@ -1,4 +1,4 @@
-## 模块概述
+# 概述
 
 - 技术文档 或 个人博客
 - 静态网站：不和后端交互，没有从数据库那数据，直接把数据写在前端
@@ -10,9 +10,7 @@
 
 ## 成品展示
 
-
 ## 开始搭建
-
 
 ## 部署上线
 
@@ -30,6 +28,6 @@
 
 > 源码
 
-- https://github.com/nan-gong/vuepress-demo
+- [源码](https://github.com/nan-gong/vuepress-demo)
 
 ---
