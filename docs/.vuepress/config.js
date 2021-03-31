@@ -5,7 +5,8 @@ module.exports = {
     // 注入到当前页面的 HTML <head> 中的标签
     ['link', {rel: 'icon', href: '/images/favicon.png'}]
   ],
-  base: '/vuepress-demo-1/',
+  dest: './dist',
+  base: '/vuepress-demo-1-website/',
   // 代码块显示行号
   markdown: {
     lineNumbers: true
@@ -15,7 +16,7 @@ module.exports = {
     logo: '/images/Logo.jpg',
     // 导航栏配置
     nav: [
-      {text: '首页', link: '/' },
+      {text: '首页', link: '/'},
       {text: '前端体系目录', link: '/hierarchy/'},
       {text: '面经', link: '/interview/'},
       {text: '我的博客', link: 'http://xmasuhai.xyz'},
@@ -30,5 +31,6 @@ module.exports = {
     'vuepress-plugin-element-tabs',
     '@vuepress/back-to-top',
   ],
+  smoothScroll: true,
   serviceWorker: true,
 }

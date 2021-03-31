@@ -7,10 +7,7 @@ set -e
 yarn run docs:build
 
 # 进入生成的文件夹
-cd docs/.vuepress/dist
-
-# 如果是发布到自定义域名
-echo 'xmasuhai.xyz' > CNAME
+cd dist
 
 git init
 git add -A

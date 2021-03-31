@@ -4,12 +4,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:deploy": "bash deploy.sh"
   },
   "license": "MIT",
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "vuepress": "^1.8.2"
+  },
+  "devDependencies": {
+    "node-sass": "^5.0.0",
+    "sass-loader": "^11.0.1"
   }
 }
