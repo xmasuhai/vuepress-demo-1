@@ -14,7 +14,8 @@
     "vuepress": "^1.8.2"
   },
   "devDependencies": {
-    "node-sass": "^5.0.0",
-    "sass-loader": "^11.0.1"
+    "node-sass": "^4.9.0",
+    "sass": "^1.17.3",
+    "sass-loader": "^7.0.1"
   }
 }

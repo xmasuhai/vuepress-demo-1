@@ -62,7 +62,7 @@ vuepress-demo
 |  ├─.vuepress
 |  |     ├─config.js
 |  |     ├─public
-|  |     |   └imgages
+|  |     |   └images
 ```
 
 - 有后缀的是文件，没后缀的是文件夹

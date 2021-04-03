@@ -8,7 +8,7 @@
 
 ## HTML
 
-### 1.语义化
+### 1.0 语义化
 
 - 用合适的标签表示标签里的内容
 - 抽象问题举例答：比如：
@@ -21,7 +21,7 @@
   - 段落 `<section></section>`
 - 这样有助于提高代码可读性及搜索引擎优化
 
-### 2.html标签有哪些
+### 2.0 html标签有哪些
 
 - 常见的 html5 标签有：header、main、footer、vav、aside、section、article
 - html 标签有：h1-h6、div、span、ul、li、p、a、img、input、i、strong
@@ -85,7 +85,7 @@
   - GET方法由于受到URL长度的限制,只能传递大约1024字节
   - HTTP协议规范没有对URL长度进行限制
   - 这个限制是特定的浏览器及服务器对它的限制 不同浏览器及服务器限制不同
-  - 注：对于中文的传递，最终会为urlencode后的编码形式进行传递，如果浏览器的编码为UTF8的话，一个汉字最终编码后的字符长度为9个字符
+  - 注：对于中文的传递，最终会为 `urlencode` 后的编码形式进行传递，如果浏览器的编码为UTF8的话，一个汉字最终编码后的字符长度为9个字符
   - 如果使用的 GET 方法，最大长度等于URL最大长度减去实际路径中的字符数
   - POST理论上是没有限制 可设置 maxPostSize="1024" 参数，只允许表单上传1m的数据 可修改 maxPostSize不同服务器版本下 等于0或负数代表无限制
   - [参考文章1](https://blog.csdn.net/w8998036/article/details/105971328)
@@ -127,7 +127,8 @@
     - 对于 POST 形式的接口地址可诱导用户进入带 Form 表单可用POST方式提交参数的页面
 - 预防： `anti-csrf-token`
   - 服务端返回的表单页面中隐藏 `_csrf_token` 值,该随机数作为 `cookie` 种入用户浏览器
-  - 后台在接受到请求后解析请求的 cookie 获取 `_csrf_token` 的值，然后和用户请求提交的 `_csrf_token` 做比较，如果相等表示请求是合法的
+  - 后台在接受到请求后解析请求的 cookie 获取 `_csrf_token` 的值
+  - 然后和用户请求提交的 `_csrf_token` 做比较，如果相等表示请求是合法的
 
 ---
 
@@ -141,17 +142,17 @@
 
 ### 2. `flex` 有哪些属性
 
-```CSS
+```css
 .wrapper{
   display: flex;
   flex-wrap: nowrap | wrap | wrap-reverse;      /* flex-flow:flex-wrap & flex-direction */
-  flex-direction: row(行) | column(列) | row-reverse | column-reverse;
+  flex-direction: row /* (行) | column(列) | row-reverse | column-reverse */ ;
   justify-content(主轴): flex-start | flex-end | center | space-between | space-around | stretch;
   align-items(附轴): flex-start | flex-end | center | space-between | space-around | stretch;
   align-content(多行内容): flex-start | flex-end | center | space-between | space-around | stretch;
 }
 .item{
-  order: integer(整数);
+  order: 1 /* integer (整数) */;
   flex: 0(放大比例) 1(缩小比例) auto(基准宽高); 后两属性可选。/* flex- grow & shrink & basis 的简写 */
   align-self: flex-start | flex-end | center | space-between | space-around | stretch;
 }
@@ -173,7 +174,7 @@
 - [z-index](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Adding_z-index)
 - 某些元素的**渲染顺序**是由其 z-index 的值影响的
 - 这是因为这些元素具有能够使他们形成一个层叠上下文的特殊属性
-  - 文档根元素（<html>）
+  - 文档根元素（`<html>`）
   - position 值为 absolute（绝对定位）
   - 或 relative（相对定位）且 z-index 值不为 auto 的元素
   - position 值为 fixed（固定定位）
@@ -210,10 +211,10 @@
 > 定宽块元素 `position: absolute;`
 
 ```CSS
-parentElement{
+.parentElement{
   position: relative;
 }
-childElement{
+.childElement{
   width: 100px;
   margin: 0 auto;                // 水平居中
   position: absolute;
@@ -224,17 +225,17 @@ childElement{
 
 - 使用`position、-margin`
 
-```CSS
-parentElement{
+```css
+.parentElement{
   position:relative;
   width: 200px;
   height: 200px;
 }
-childElement{
+.childElement{
    position: absolute;
    top: 50%;
    left: 50%;
-   weight: 100px;
+   width: 100px;
    height: 100px;
    margin-top: -50px;
    margin-left: -50px;
@@ -246,24 +247,24 @@ childElement{
 - 使用`flex`
 
 ```CSS
-parentElement{
+.parentElement{
   height: 300px;  // 撑开内容  
   display: flex;
   justify-content: center;    // 水平居中
   align-items:center;         // 垂直居中
 }
-// 子元素居中
+ /* 子元素居中 */ 
 ```
 
 - 使用`position、transform`
 
 ```CSS
-parentElement{
+.parentElement{
   position: relative;
   width: 200px;
   height: 200px;
 }
-childElement{
+.childElement{
    position: absolute;
    top: 50%;
    left: 50%
@@ -274,7 +275,7 @@ childElement{
 - 没写高度的块元素
 
 ```CSS
-parentElement{
+.parentElement{
   text-align: center;  // 水平居中
   padding: 100px 0;    // 垂直居中
 }
@@ -285,10 +286,10 @@ parentElement{
 - 单行文本 `height、line-height`
 
 ```CSS
-parentElement{
+.parentElement{
   text-align: center;      // 水平居中
 }
-childElement{
+.childElement{
   height: 100px;
   line-height: 100px;      // 垂直居中
 }
@@ -297,7 +298,7 @@ childElement{
 - 多行文本
 
 ```CSS
-parentElement{
+.parentElement{
   text-align: center;     //水平居中
   display: table-cell;
   vertical-align: middle   //垂直居中
@@ -1053,8 +1054,8 @@ function on(eventType, element, selector, fn) {
 
 #### 14.2 用 mouse 事件写一个可拖曳的 div
 
-```HTML
-<html>
+```html
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -1064,14 +1065,14 @@ function on(eventType, element, selector, fn) {
 <div id="xxx"></div>
 </body>
 <script>
-var dragging = false
-var position = null
+let dragging = false
+let position = null
+let xxx = document.querySelector('<div>');
 
 xxx.addEventListener('mousedown',function(e){
   dragging = true
   position = [e.clientX, e.clientY]
 })
-
 
 document.addEventListener('mousemove', function(e){
   if(dragging === false){return}
@@ -1148,8 +1149,8 @@ div{
 - mounted
 - beforeUpdate
 - updated
-- beforeDestory
-- destoryed
+- beforeDestroy
+- destroyed
 - 在 mounted 阶段请求数据
 
 #### 1.3`Vue` 如何实现组件间通信
@@ -1202,7 +1203,7 @@ div{
 
 ---
 
-## Webapck
+## Webpack
 
 ### 1.1 有哪些常见 loader 和 plugin，用过哪些
 

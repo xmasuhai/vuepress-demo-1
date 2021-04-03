@@ -40,6 +40,12 @@ next: /tech/Vue2.x/VuePress/
   - `.fade-enter, .fade-leave-to {}`
   - 一些 UI 组件库的CSS样式 会覆盖
 
+
+<ClientOnly>
+<Vue-Animation-Transition/>
+<Button1/>
+</ClientOnly>
+
 > 例子
 
 ```html
@@ -375,7 +381,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/style/animate.min.css";
+...
 </style>
 
 ```
@@ -461,3 +467,4 @@ export default {
 
 ---
 ---
+

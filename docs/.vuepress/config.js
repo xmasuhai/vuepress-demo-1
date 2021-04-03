@@ -1,3 +1,4 @@
+const path = require('path')
 module.exports = {
   title: 'FrontEnd Demo World',
   description: '收集关于前端的Demo',
@@ -28,9 +29,11 @@ module.exports = {
     lastUpdated: 'Last Updated',
   },
   plugins: [
-    'vuepress-plugin-element-tabs',
     '@vuepress/back-to-top',
   ],
   smoothScroll: true,
-  serviceWorker: true,
+  scss:{
+    includePaths: [path.join(__dirname, '../../styles')]
+  },
+  // serviceWorker: true,
 }
