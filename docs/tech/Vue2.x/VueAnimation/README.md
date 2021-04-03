@@ -38,12 +38,14 @@ next: /tech/Vue2.x/VuePress/
 - 注意样式隔离
   - `.fade-enter-active, .fade-leave-active {}`
   - `.fade-enter, .fade-leave-to {}`
-  - 一些 UI 组件库的CSS样式 会覆盖
-
+  - 一些 UI 组件库的CSS全局样式会污染默认样式
 
 <ClientOnly>
+<code-drawer>
+<template v-slot="vComponent">
 <Vue-Animation-Transition/>
-<Button1/>
+</template>
+</code-drawer>
 </ClientOnly>
 
 > 例子

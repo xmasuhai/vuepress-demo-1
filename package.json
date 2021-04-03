@@ -6,16 +6,19 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "bash deploy.sh"
+    "docs:deploy": "bash deployVuePressDocs.sh"
   },
   "license": "MIT",
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.8.2",
+    "highlight.js": "^10.7.1",
+    "vue-highlight.js": "^3.1.0",
     "vuepress": "^1.8.2"
   },
   "devDependencies": {
     "node-sass": "^4.9.0",
     "sass": "^1.17.3",
-    "sass-loader": "^7.0.1"
+    "sass-loader": "^7.0.1",
+    "stylelint": "^13.12.0"
   }
 }

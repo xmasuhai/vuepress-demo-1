@@ -1,4 +1,3 @@
-const path = require('path')
 module.exports = {
   title: 'FrontEnd Demo World',
   description: '收集关于前端的Demo',
@@ -31,9 +30,6 @@ module.exports = {
   plugins: [
     '@vuepress/back-to-top',
   ],
-  smoothScroll: true,
-  scss:{
-    includePaths: [path.join(__dirname, '../../styles')]
-  },
+  smoothScroll: true
   // serviceWorker: true,
 }

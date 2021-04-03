@@ -3,7 +3,8 @@
     <show-panel class="panel"
                 title="Transition"
                 transitionName="fade"
-                showText="Hello"></show-panel>
+                showText="Hello">
+    </show-panel>
   </div>
 </template>
 
@@ -20,8 +21,21 @@ export default {
 }
 </script>
 
-<style scoped>
-.panel {
-  color: red;
+<style lang="scss" scoped>
+::v-deep {
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 1s;
+    }
+
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+    width: 100px;
+    }
+
+  p {
+    width: 300px;
+    }
   }
 </style>

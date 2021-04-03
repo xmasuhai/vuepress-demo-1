@@ -1,13 +1,13 @@
 <template>
   <div>
     <br>
-    <h2>{{title}}</h2>
+    <h2>{{ title }}</h2>
     <br>
     <button @click="visible = !visible">
       Toggle
     </button>
     <transition class="transition" :name="transitionName">
-      <p v-if="visible">{{showText}}</p>
+      <p v-if="visible">{{ showText }}</p>
     </transition>
     <br>
   </div>

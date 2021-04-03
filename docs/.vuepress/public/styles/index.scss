@@ -1,0 +1,11 @@
+$shadow-color: rgba(0, 0, 0, .2);
+
+.theme-container.sidebar-open .sidebar {
+  border: 0;
+  box-shadow: 0 0 10px $shadow-color;
+  }
+
+.sidebar,
+.navbar {
+  z-index: 10000;
+  }
