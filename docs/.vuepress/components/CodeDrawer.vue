@@ -45,7 +45,6 @@ import accordion from '../mixins/accordion.js'
 export default {
   name: 'accordion',
   mixins: [accordion],
-  components: {},
   data() {
     return {
       codeStr: `
