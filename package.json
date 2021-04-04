@@ -49,13 +49,14 @@
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^9.5.0",
     "node-sass": "^4.9.0",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
+    "sass": "1.26.5",
+    "sass-loader": "8.0.2",
     "stylelint": "^13.12.0",
-    "svg-sprite-loader": "^6.0.2",
+    "svg-sprite-loader": "5.2.1",
     "svgo-loader": "2.2.1",
-    "typescript": "~4.1.5",
-    "vue-template-compiler": "^2.6.11"
+    "typescript": "^4.2.3",
+    "vue-template-compiler": "^2.6.11",
+    "vuepress-plugin-typescript": "^0.3.1"
   },
   "_id": "vuepress-demo-world@1.0.0",
   "gitHooks": {

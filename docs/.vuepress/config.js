@@ -29,6 +29,14 @@ module.exports = {
   },
   plugins: [
     '@vuepress/back-to-top',
+    [
+      'vuepress-plugin-typescript',
+      {
+        tsLoaderOptions: {
+          // ts-loader 的所有配置项
+        },
+      },
+    ],
   ],
   smoothScroll: true
   // serviceWorker: true,
