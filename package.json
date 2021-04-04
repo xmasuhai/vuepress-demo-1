@@ -1,24 +1,72 @@
 {
   "name": "vuepress-demo-world",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs:dev": "vuepress dev docs",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:dev": "cross-env NODE_ENV=development yarn build",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "bash deployVuePressDocs.sh"
+    "docs:deploy": "bash deployVuePressDocs.sh",
+    "docs:dev": "vuepress dev docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT",
+  "main": "index.js",
   "dependencies": {
+    "@vue/cli": "^4.5.12",
     "@vuepress/plugin-back-to-top": "^1.8.2",
+    "core-js": "^3.6.5",
+    "cross-env": "^7.0.3",
+    "global": "^4.4.0",
     "highlight.js": "^10.7.1",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
     "vue-highlight.js": "^3.1.0",
-    "vuepress": "^1.8.2"
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^3.2.0",
+    "vuepress": "^1.8.2",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@types/webpack-env": "^1.16.0",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^1.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^9.5.0",
     "node-sass": "^4.9.0",
-    "sass": "^1.17.3",
-    "sass-loader": "^7.0.1",
-    "stylelint": "^13.12.0"
-  }
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "stylelint": "^13.12.0",
+    "svg-sprite-loader": "^6.0.2",
+    "svgo-loader": "2.2.1",
+    "typescript": "~4.1.5",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "_id": "vuepress-demo-world@1.0.0",
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "readme": "ERROR: No README data found!"
 }
