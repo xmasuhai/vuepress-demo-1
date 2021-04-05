@@ -5,9 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:dev": "cross-env NODE_ENV=development yarn build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "build:dev": "cross-env NODE_ENV=development yarn build",
     "docs:build": "vuepress build docs",
     "docs:deploy": "bash deployVuePressDocs.sh",
     "docs:dev": "vuepress dev docs",
