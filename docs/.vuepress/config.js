@@ -29,6 +29,7 @@ module.exports = {
   },
   plugins: [
     '@vuepress/back-to-top',
+    'demo-container',
     [
       'vuepress-plugin-typescript',
       {

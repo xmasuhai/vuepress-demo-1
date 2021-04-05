@@ -40,56 +40,69 @@ next: /tech/Vue2.x/VuePress/
   - `.fade-enter, .fade-leave-to {}`
   - 一些 UI 组件库的CSS全局样式会污染默认样式
 
+> 例子
+
 <ClientOnly>
 <code-drawer>
 <template v-slot:aaa>
-<Vue-Animation-Transition/>
+<Vue-Animation-TransitionCSS/>
 </template>
 </code-drawer>
 </ClientOnly>
 
-> 例子
+---
 
+::: demo 此处放置代码示例的描述信息，支持 `Markdown` 语法，**描述信息只支持单行**
 ```html
 <template>
-<div>
-  <button v-on:click="visible = !visible">
-    Toggle
-  </button>
-  <transition name="fade">
-    <p v-if="visible">hello</p>
-  </transition>
-</div>
+  <div>
+    <h2>{{ title }}</h2>
+    <br>
+    <button @click="visible = !visible">
+      Toggle
+    </button>
+    <transition :name="transitionName">
+      <span v-if="visible">{{ showText }}</span>
+    </transition>
+    <br>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      visible: true
+      visible: true,
+      title: 'Transition',
+      transitionName: 'fade',
+      showText: 'Hello',
     }
-  },
-  methods: {
-
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: all 2s;
-}
-.fade-enter, .fade-leave-to {
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1s;
+  }
+
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
   width: 100px;
-}
+  }
+
 p {
-  border: 1px solid red;
   width: 300px;
-}
+  }
 </style>
 
 ```
+:::
+
+---
+
 
 - 用`<transition></transition>`包裹需要加动画的节点
 - 设置属性`name`: `<transition name="fade">`
@@ -119,6 +132,7 @@ p {
 
 > CSS 过渡例子
 
+::: demo 此处放置代码示例的描述信息，支持 `Markdown` 语法，**描述信息只支持单行**
 ```html
 <template>
   <div>
@@ -132,32 +146,31 @@ p {
 </template>
 
 <script>
+export default {
   data() {
-     // noinspection JSAnnotator
     return {
       show: true
     }
   }
+}
 </script>
 
-<style lang="scss" scoped>
-/* 可以设置不同的进入和离开动画 */
-/* 设置持续时间和动画函数 */
+<style>
 .slide-fade-enter-active {
   transition: all .3s ease;
 }
 .slide-fade-leave-active {
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-/* 淡入时 初始位置，淡出时 结束位置*/
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
+
+.slide-fade-enter, .slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
 </style>
 
 ```
+:::
 
 > 小结
 
@@ -179,12 +192,22 @@ p {
 - `enter / leave` 被 `@keyframes`中的关键帧（`to / from / 0% / 100%`）代替
 - 反向淡出动画，设置`.v-leave.active{anomation: animationName 1s reverse}`
 
+
+::: demo 此处放置代码示例的描述信息，支持 `Markdown` 语法，**描述信息只支持单行**
 ```html
 <template>
 <div>
-  <button @click="showAnimation = !showAnimation">Toggle show</button>
+  <button @click="showAnimation = !showAnimation">
+    Toggle show
+  </button>
   <transition name="bounce">
-    <p v-if="showAnimation">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+    <p v-if="showAnimation">
+      Lorem ipsum dolor sit amet, 
+      consectetur adipiscing elit. 
+      Mauris facilisis enim libero, 
+      at lacinia diam fermentum id. 
+      Pellentesque habitant morbi tristique senectus et netus.
+    </p>
   </transition>
 </div>
 </template>
@@ -199,8 +222,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-/* animation */
+<style>
 .bounce-enter-active {
   animation: bounce-in .5s;
 }
@@ -221,6 +243,7 @@ export default {
 </style>
 
 ```
+:::
 
 ---
 

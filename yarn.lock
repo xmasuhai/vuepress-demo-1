@@ -14451,11 +14451,6 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-svg-sprite@1.4.3:
-  version "1.4.3"
-  resolved "https://registry.npm.taobao.org/vue-svg-sprite/download/vue-svg-sprite-1.4.3.tgz#cf8b675bfcc0f6dc503123cae031478476b749fc"
-  integrity sha1-z4tnW/zA9txQMSPK4DFHhHa3Sfw=
-
 vue-template-compiler@^2.6.10, vue-template-compiler@^2.6.11:
   version "2.6.12"
   resolved "https://registry.npm.taobao.org/vue-template-compiler/download/vue-template-compiler-2.6.12.tgz#947ed7196744c8a5285ebe1233fe960437fcc57e"
@@ -14494,6 +14489,11 @@ vuepress-plugin-container@^2.0.2:
   dependencies:
     "@vuepress/shared-utils" "^1.2.0"
     markdown-it-container "^2.0.0"
+
+vuepress-plugin-demo-container@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/vuepress-plugin-demo-container/download/vuepress-plugin-demo-container-0.2.0.tgz#5d92161b1c033b91f3cabddd994d5beed47ab6a6"
+  integrity sha1-XZIWGxwDO5Hzyr3dmU1b7tR6tqY=
 
 vuepress-plugin-smooth-scroll@^0.0.3:
   version "0.0.3"
