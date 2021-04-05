@@ -7,7 +7,7 @@
       Toggle
     </button>
     <transition class="transition" :name="transitionName">
-      <p v-if="visible">{{ showText }}</p>
+      <span v-if="visible">{{ showText }}</span>
     </transition>
     <br>
   </div>

@@ -42,7 +42,7 @@ next: /tech/Vue2.x/VuePress/
 
 <ClientOnly>
 <code-drawer>
-<template v-slot="vComponent">
+<template v-slot:aaa>
 <Vue-Animation-Transition/>
 </template>
 </code-drawer>

@@ -32,11 +32,10 @@ module.exports = {
     [
       'vuepress-plugin-typescript',
       {
-        tsLoaderOptions: {
-          // ts-loader 的所有配置项
-        },
-      },
-    ],
+        // ts-loader 的所有配置项
+        tsLoaderOptions: {}
+      }
+    ]
   ],
   smoothScroll: true
   // serviceWorker: true,

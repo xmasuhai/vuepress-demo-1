@@ -5,7 +5,7 @@
         <!--
         组件展示位置
         -->
-        <slot name="vComponent">组件展示位置</slot>
+        <slot name="aaa"></slot>
       </div>
       <div class="code-content" style="height: 0;">
         <!--
@@ -30,9 +30,10 @@
       code drawer
       -->
       <div class="lock-code" @click="showCode(0)">
-        <!--
-        <w-icon class="icon-down" :name="isShow[0] === false ? 'down' : 'up'"></w-icon>
-        -->
+        <Icon
+            class="icon-hover"
+            :name="isShow[0] === false ? 'i-arrow-down' : 'i-arrow-up'"
+        ></Icon>
         <span class="lock-code-word">{{ isShow[0] === false ? '显示代码' : '隐藏代码' }}</span>
       </div>
     </div>
@@ -41,15 +42,24 @@
 
 <script>
 import accordion from '../mixins/accordion.js'
+import '/docs/.vuepress/public/svgs/iconfont.js'
 
 export default {
   name: 'accordion',
   mixins: [accordion],
   data() {
     return {
+      isShow: [],
       codeStr: `
-
-        `.replace(/^\s*/gm, '').trim(),
+<template>
+  <div>
+    <show-panel class="panel"
+                title="Transition"
+                transitionName="fade"
+                showText="Hello">
+    </show-panel>
+  </div>
+</template>`,
     }
   }
 }
@@ -76,7 +86,7 @@ export default {
       opacity: 1;
       }
 
-    .lock-code .icon-down {
+    .lock-code .icon-hover {
       transform: translateX(-40px);
       }
 
@@ -131,12 +141,13 @@ export default {
         color: #409eff;
         }
 
-      .icon-down {
+      .icon-hover {
         fill: #409eff;
+        color: #409eff;
         }
       }
 
-    .icon-down {
+    .icon-hover {
       transform: translateX(0px);
       transition: all .1s;
       }
