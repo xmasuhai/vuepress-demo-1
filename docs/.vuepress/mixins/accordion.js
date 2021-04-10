@@ -1,5 +1,5 @@
 export default {
-  data () {
+  data() {
     return {
       // 每一个区域的高度
       codeParent: [],
@@ -10,19 +10,19 @@ export default {
   },
   methods: {
     // 根据子元素的高度 设置代码区域父元素的高度
-    showCode (index) {
+    showCode(index) {
       this.$set(this.isShow, index, !this.isShow[index])
       this.$nextTick(() => {
         if (this.isShow[index] === true) {
           this.codeParent[index].style.height =
-            +this.codeHeightArr[index] + 25 + 'px'
+            + this.codeHeightArr[index] + 25 + 'px'
         } else {
           this.codeParent[index].style.height = '0'
         }
       })
     },
     // 得到所有代码区域的高度
-    getCodesHeight () {
+    getCodesHeight() {
       const arr = document
         .getElementsByClassName('code-content-height')
       this.codeParent = document
@@ -35,7 +35,7 @@ export default {
       }
     },
   },
-  mounted () {
+  mounted() {
     // 异步获取当前组件内部 code区域的高度 以便于给点击的时候使用
     this.$nextTick(() => {
       this.getCodesHeight()

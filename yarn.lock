@@ -1329,6 +1329,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/animejs@^3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@types/animejs/-/animejs-3.1.3.tgz#da720ea98272b3e29f595bb15efccadb9dc04dd4"
+  integrity sha512-rJsAySPkYj2guclqKYM0H3PrmztgGL36e/oEv0APwiScmlNNQ36/S1INrOKRRLdygJbEiGjYDn4MAQ9LRNP4DA==
+
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.npm.taobao.org/@types/anymatch/download/@types/anymatch-1.3.1.tgz?cache=0&sync_timestamp=1613378060592&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fanymatch%2Fdownload%2F%40types%2Fanymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
@@ -2666,6 +2671,16 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/amdefine/download/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
+
+animate.css@3.6.1:
+  version "3.6.1"
+  resolved "https://registry.npm.taobao.org/animate.css/download/animate.css-3.6.1.tgz#4ea8a48556378bc8d7535224296c4c0dac9229de"
+  integrity sha1-TqikhVY3i8jXU1IkKWxMDaySKd4=
+
+animejs@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/animejs/-/animejs-3.2.1.tgz#de9fe2e792f44a777a7fdf6ae160e26604b0cdda"
+  integrity sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==
 
 ansi-align@^3.0.0:
   version "3.0.0"
@@ -7205,6 +7220,11 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/hex-color-regex/download/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha1-TAb8y0YC/iYCs8k9+C1+fb8aio4=
+
+highlight.js@*:
+  version "10.7.2"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.2.tgz#89319b861edc66c48854ed1e6da21ea89f847360"
+  integrity sha512-oFLl873u4usRM9K63j4ME9u3etNF0PLiJhSQ8rdfuL51Wn3zkD6drf9ZW0dOzjnZI22YYG24z30JcmfCZjMgYg==
 
 highlight.js@^10.7.1:
   version "10.7.1"
@@ -14376,6 +14396,13 @@ vue-highlight.js@^3.1.0:
     detect-indent "^5.0.0"
     redent "^2.0.0"
     tslib "^1.9.3"
+
+vue-highlightjs@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/vue-highlightjs/-/vue-highlightjs-1.3.3.tgz#29a0d57132fc1ce15cfa61e896918f5b718c5d52"
+  integrity sha1-KaDVcTL8HOFc+mHolpGPW3GMXVI=
+  dependencies:
+    highlight.js "*"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

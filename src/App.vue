@@ -6,6 +6,16 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <pre v-highlight-a>
+      <code class="html">
+        <div>HaHa</div>
+      </code>
+    </pre>
+    <pre v-highlightjs>
+      <code class="javascript">
+        const s = new Date().toString()
+      </code>
+    </pre>
   </div>
 </template>
 

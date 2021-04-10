@@ -5,8 +5,9 @@
         <!--
         组件展示位置
         -->
-        <slot name="aaa"></slot>
+        <slot :name="slotName"></slot>
       </div>
+      <Drawer></Drawer>
       <div class="code-content" style="height: 0;">
         <!--
         <div class="code-user-desc">
@@ -19,16 +20,13 @@
             组件代码
           </div>
           -->
-          <pre>
-            <code class="vue">
-              {{ codeStr }}
-            </code>
+          <pre v-highlightjs>
+            <code class="vue" v-text="codeStr"></code>
           </pre>
         </div>
       </div>
       <!--
       code drawer
-      -->
       <div class="lock-code" @click="showCode(0)">
         <Icon
             class="icon-hover"
@@ -36,31 +34,33 @@
         ></Icon>
         <span class="lock-code-word">{{ isShow[0] === false ? '显示代码' : '隐藏代码' }}</span>
       </div>
+      -->
     </div>
   </div>
 </template>
 
 <script>
-import accordion from '../mixins/accordion.js'
 import '/docs/.vuepress/public/svgs/iconfont.js'
+import Drawer from './Vue/drawer/Drawer'
 
 export default {
   name: 'accordion',
-  mixins: [accordion],
+  components: {Drawer},
   data() {
     return {
       isShow: [],
-      codeStr: `
-<template>
-  <div>
-    <show-panel class="panel"
-                title="Transition"
-                transitionName="fade"
-                showText="Hello">
-    </show-panel>
-  </div>
-</template>`,
+      codeStr: this.resourceCode,
     }
+  },
+  props: {
+    slotName: {
+      type: String,
+      required: true,
+      default: "CSS_transition"
+    },
+    resourceCode: {
+      type: String,
+    },
   }
 }
 </script>
@@ -79,7 +79,7 @@ export default {
     margin: 55px 0 20px;
     }
 
-  &:hover {
+  &:hover, &::v-deep:hover {
     .lock-code .lock-code-word {
       font-size: 14px;
       transform: translateX(-40px);
@@ -90,7 +90,9 @@ export default {
       transform: translateX(-40px);
       }
 
-    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
+    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6),
+    0 2px 4px 0 rgba(232, 237, 250, .5);
+
     }
 
   .code-content {
@@ -98,8 +100,12 @@ export default {
     border-top: 1px solid #eaeefb;
     overflow: hidden;
     transition: height .2s;
+    margin: 0;
+    padding: 0;
 
     .code-content-height {
+      overflow: auto;
+
       .code-user-desc {
         background: #ffffff;
         margin: 10px 10px 0 10px;
@@ -112,6 +118,8 @@ export default {
 
       > pre {
         background: none;
+        margin: 0;
+        padding: 0 24px;
 
         > code {
           color: #3182bd;

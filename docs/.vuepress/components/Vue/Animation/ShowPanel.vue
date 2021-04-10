@@ -3,7 +3,7 @@
     <br>
     <h2>{{ title }}</h2>
     <br>
-    <button @click="visible = !visible">
+    <button @click="toggle">
       Toggle
     </button>
     <transition class="transition" :name="transitionName">
@@ -18,6 +18,11 @@ export default {
   data() {
     return {
       visible: true
+    }
+  },
+  methods: {
+    toggle() {
+      this.visible = !this.visible
     }
   },
   props: {
