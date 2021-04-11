@@ -67,9 +67,21 @@ next: /tech/Vue2.x/VuePress/
   </code-drawer>
 </ClientOnly>
 
+---
+
 <ClientOnly>
-  <code-drawer slotName="CSS_transition" :resourceCode='`<h2>FkWd</h2>`'>
-  <template v-slot:CSS_transition>
+  <code-drawer slotName="AnimeJS" :resourceCode='`<h2>FkWd</h2>`'>
+  <template v-slot:AnimeJS>
+    <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
+  </template>
+  </code-drawer>
+</ClientOnly>
+
+---
+
+<ClientOnly>
+  <code-drawer slotName="AnimeJS" :resourceCode='`<h2>FkWd</h2>`'>
+  <template v-slot:AnimeJS>
     <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
   </template>
   </code-drawer>

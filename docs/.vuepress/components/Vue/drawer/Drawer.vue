@@ -2,10 +2,10 @@
   <div class="lock-code" @click="showCode(0)">
     <Icon
         class="icon-hover"
-        :name="isShow[0] === false ? 'i-arrow-down' : 'i-arrow-up'"
+        :name="isShow[showIndex] === false ? 'i-arrow-down' : 'i-arrow-up'"
     ></Icon>
     <span class="lock-code-word">
-      {{ isShow[0] === false ? '显示代码' : '隐藏代码' }}
+      {{ isShow[showIndex] === false ? '显示代码' : '隐藏代码' }}
     </span>
   </div>
 </template>
@@ -16,6 +16,12 @@ import accordion from '../../../mixins/accordion.js'
 export default {
   name: 'drawer',
   mixins: [accordion],
+  props: {
+    showIndex: {
+      type: Number,
+      // required: true,
+    },
+  },
 }
 </script>
 

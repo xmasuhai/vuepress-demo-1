@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <h3>AnimeJS</h3>
+    <hr>
     <button @click="go">Click Here to Animate</button>
     <h3 ref="square">hello</h3>
   </div>
@@ -17,6 +19,7 @@ export default {
   methods: {
     go() {
       // console.log(anime);
+      // bug fix: disable button when anime run
       anime({
         targets: this.$refs.square,
         translateX: 300,

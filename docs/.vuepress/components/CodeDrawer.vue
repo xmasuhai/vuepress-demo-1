@@ -7,8 +7,8 @@
         -->
         <slot :name="slotName"></slot>
       </div>
-      <Drawer></Drawer>
-      <div class="code-content" style="height: 0;">
+      <Drawer :showIndex="0"></Drawer>
+      <div class="code-content" style="height: 0">
         <!--
         <div class="code-user-desc">
           组件描述说明
@@ -40,66 +40,69 @@
 </template>
 
 <script>
-import '/docs/.vuepress/public/svgs/iconfont.js'
-import Drawer from './Vue/drawer/Drawer'
+import "/docs/.vuepress/public/svgs/iconfont.js";
+import Drawer from "./Vue/drawer/Drawer";
 
 export default {
-  name: 'accordion',
-  components: {Drawer},
+  name: "accordion",
+  components: { Drawer },
   data() {
     return {
       isShow: [],
       codeStr: this.resourceCode,
-    }
+    };
   },
   props: {
     slotName: {
       type: String,
       required: true,
-      default: "CSS_transition"
     },
     resourceCode: {
       type: String,
     },
-  }
-}
+  },
+  /*  mounted() {
+    console.log(this.slotName);
+    console.log(this.codeStr);
+  }*/
+};
 </script>
 
 <style lang="scss" scoped>
 .component-wrapper {
   border: 1px solid #ebebeb;
   border-radius: 3px;
-  transition: .2s;
+  transition: 0.2s;
 
   .component-wrapper-demo {
     padding: 24px 24px 15px 24px;
-    }
+  }
 
   h4 {
     margin: 55px 0 20px;
-    }
+  }
 
-  &:hover, &::v-deep:hover {
+  &:hover,
+  &::v-deep:hover {
     .lock-code .lock-code-word {
       font-size: 14px;
       transform: translateX(-40px);
       opacity: 1;
-      }
+    }
 
     .lock-code .icon-hover {
       transform: translateX(-40px);
-      }
-
-    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6),
-    0 2px 4px 0 rgba(232, 237, 250, .5);
-
     }
+
+    box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
+      0 2px 4px 0 rgba(232, 237, 250, 0.5);
+  }
 
   .code-content {
     background-color: #fafafa;
     border-top: 1px solid #eaeefb;
     overflow: hidden;
-    transition: height .2s;
+    transition: height 0.2s;
     margin: 0;
     padding: 0;
 
@@ -114,7 +117,7 @@ export default {
         line-height: 26px;
         border: 1px solid #ebebeb;
         border-radius: 3px;
-        }
+      }
 
       > pre {
         background: none;
@@ -123,10 +126,10 @@ export default {
 
         > code {
           color: #3182bd;
-          }
         }
       }
     }
+  }
 
   .lock-code {
     border-top: 1px solid #eaeefb;
@@ -147,42 +150,41 @@ export default {
 
       .lock-code-word {
         color: #409eff;
-        }
+      }
 
       .icon-hover {
         fill: #409eff;
         color: #409eff;
-        }
       }
+    }
 
     .icon-hover {
       transform: translateX(0px);
-      transition: all .1s;
-      }
+      transition: all 0.1s;
+    }
 
     .lock-code-word {
       font-size: 0;
       margin-left: 15px;
       display: inline-block;
-      transition: all .1s;
+      transition: all 0.1s;
       opacity: 0;
-      }
     }
   }
+}
 
 ::-webkit-scrollbar {
   width: 8px;
   background-color: #f5f5f5;
-  }
+}
 
 ::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: #ccc;
-  }
+}
 
 ::-webkit-scrollbar-track {
   border-radius: 6px;
   background-color: #f5f5f5;
-  }
-
+}
 </style>
