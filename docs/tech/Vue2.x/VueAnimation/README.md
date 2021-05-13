@@ -50,7 +50,7 @@ next: /tech/Vue2.x/VuePress/
 > 例子
 
 <ClientOnly>
-  <code-drawer slotName="CSS_transition" :resourceCode='`
+  <code-drawer slotName="CSS_transition" :showIndex="0" :resourceCode='`
 <template>
   <div>
     <show-panel class="panel"
@@ -70,7 +70,7 @@ next: /tech/Vue2.x/VuePress/
 ---
 
 <ClientOnly>
-  <code-drawer slotName="AnimeJS" :resourceCode='`<h2>FkWd</h2>`'>
+  <code-drawer slotName="AnimeJS" :showIndex="1" :resourceCode='`<h2>FkWd</h2>`'>
   <template v-slot:AnimeJS>
     <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
   </template>
@@ -80,7 +80,7 @@ next: /tech/Vue2.x/VuePress/
 ---
 
 <ClientOnly>
-  <code-drawer slotName="AnimeJS" :resourceCode='`<h2>FkWd</h2>`'>
+  <code-drawer slotName="AnimeJS" :showIndex="2" :resourceCode='`<h2>FkWd</h2>`'>
   <template v-slot:AnimeJS>
     <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
   </template>

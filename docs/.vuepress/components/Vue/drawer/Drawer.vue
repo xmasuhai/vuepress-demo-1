@@ -22,6 +22,9 @@ export default {
       // required: true,
     },
   },
+  mounted: function () {
+    console.log(this.showIndex)
+  }
 }
 </script>
 

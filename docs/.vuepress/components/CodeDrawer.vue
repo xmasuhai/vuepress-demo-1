@@ -7,7 +7,7 @@
         -->
         <slot :name="slotName"></slot>
       </div>
-      <Drawer :showIndex="0"></Drawer>
+      <Drawer :showIndex="showIndex"></Drawer>
       <div class="code-content" style="height: 0">
         <!--
         <div class="code-user-desc">
@@ -59,6 +59,10 @@ export default {
     },
     resourceCode: {
       type: String,
+    },
+    showIndex: {
+      type: Number,
+      default: 0
     },
   },
   /*  mounted() {
