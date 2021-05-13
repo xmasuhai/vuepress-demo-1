@@ -28,7 +28,6 @@ export default {
     showCode() {
       this.isShowCode = !this.isShowCode
       this.$emit('update:isShowCodeContent', this.isShowCode)
-      console.log(this.isShowCode)
     }}
 }
 </script>

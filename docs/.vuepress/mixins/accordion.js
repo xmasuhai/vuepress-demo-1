@@ -29,12 +29,9 @@ export default {
       this.codeParent = document
           .getElementsByClassName('code-content')
       const arrLength = arr.length
-      // console.log(arrLength)
-      // console.log(arr)
       for (let i = 0; i < arrLength; i++) {
         this.codeHeightArr
             .push(arr[i].getBoundingClientRect().height)
-        // console.log(arr[i])
         this.isShow.push(false)
       }
     },
