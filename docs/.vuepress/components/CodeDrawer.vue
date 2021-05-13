@@ -7,14 +7,14 @@
         -->
         <slot :name="slotName"></slot>
       </div>
-      <Drawer :showIndex="0"></Drawer>
+      <Drawer :isShowCodeContent.sync="showCodeContent"></Drawer>
       <div class="code-content" style="height: 0">
         <!--
         <div class="code-user-desc">
           组件描述说明
         </div>
         -->
-        <div class="code-content-height">
+        <div class="code-content-height" v-show="showCodeContent">
           <!--
           <div class="code-user-desc">
             组件代码
@@ -45,11 +45,12 @@ import Drawer from "./Vue/drawer/Drawer";
 
 export default {
   name: "accordion",
-  components: { Drawer },
+  components: {Drawer},
   data() {
     return {
-      isShow: [],
+      // isShow: [],
       codeStr: this.resourceCode,
+      showCodeContent: false
     };
   },
   props: {
@@ -60,7 +61,14 @@ export default {
     resourceCode: {
       type: String,
     },
+    showIndex: {
+      type: Number,
+      // required: true,
+    },
   },
+  updated() {
+    console.log(this.showCodeContent)
+  }
   /*  mounted() {
     console.log(this.slotName);
     console.log(this.codeStr);
@@ -95,7 +103,7 @@ export default {
     }
 
     box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
-      0 2px 4px 0 rgba(232, 237, 250, 0.5);
+    0 2px 4px 0 rgba(232, 237, 250, 0.5);
   }
 
   .code-content {

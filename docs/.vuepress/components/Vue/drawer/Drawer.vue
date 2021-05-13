@@ -1,27 +1,35 @@
 <template>
-  <div class="lock-code" @click="showCode(0)">
+  <div class="lock-code" @click="showCode">
     <Icon
         class="icon-hover"
-        :name="isShow[showIndex] === false ? 'i-arrow-down' : 'i-arrow-up'"
+        :name="isShowCode === false ? 'i-arrow-down' : 'i-arrow-up'"
     ></Icon>
     <span class="lock-code-word">
-      {{ isShow[showIndex] === false ? '显示代码' : '隐藏代码' }}
+      {{ isShowCode === false ? '显示代码' : '隐藏代码' }}
     </span>
   </div>
 </template>
 
 <script>
-import '/docs/.vuepress/public/svgs/iconfont.js'
-import accordion from '../../../mixins/accordion.js'
 export default {
   name: 'drawer',
-  mixins: [accordion],
+  data() {
+    return {
+      isShowCode: this.isShowCodeContent
+    }
+  },
   props: {
-    showIndex: {
-      type: Number,
-      // required: true,
+    isShowCodeContent: {
+      type: Boolean,
+      required: true,
     },
   },
+  methods: {
+    showCode() {
+      this.isShowCode = !this.isShowCode
+      this.$emit('update:isShowCodeContent', this.isShowCode)
+      console.log(this.isShowCode)
+    }}
 }
 </script>
 
@@ -47,26 +55,26 @@ export default {
       font-size: 14px;
       transform: translateX(-40px);
       opacity: 1;
-      }
+    }
 
     .lock-code .icon-hover {
       transform: translateX(-40px);
-      }
+    }
 
     .lock-code-word {
       color: #409eff;
-      }
+    }
 
     .icon-hover {
       fill: #409eff;
       color: #409eff;
-      }
     }
+  }
 
   .icon-hover {
     transform: translateX(0px);
     transition: all .1s;
-    }
+  }
 
   .lock-code-word {
     font-size: 0;
@@ -74,7 +82,7 @@ export default {
     display: inline-block;
     transition: all .1s;
     opacity: 0;
-    }
+  }
   }
 
 </style>

@@ -15,24 +15,26 @@ export default {
       this.$nextTick(() => {
         if (this.isShow[index] === true) {
           this.codeParent[index].style.height =
-            + this.codeHeightArr[index] + 25 + 'px'
+              + this.codeHeightArr[index] + 25 + 'px'
         } else {
           this.codeParent[index].style.height = '0'
         }
       })
     },
+    // 得到所有代码区域的DOM
     // 得到所有代码区域的高度
     getCodesHeight() {
       const arr = document
-        .getElementsByClassName('code-content-height')
+          .getElementsByClassName('code-content-height')
       this.codeParent = document
-        .getElementsByClassName('code-content')
+          .getElementsByClassName('code-content')
       const arrLength = arr.length
-      console.log(arrLength)
-      console.log(arr)
+      // console.log(arrLength)
+      // console.log(arr)
       for (let i = 0; i < arrLength; i++) {
         this.codeHeightArr
-          .push(arr[i].getBoundingClientRect().height)
+            .push(arr[i].getBoundingClientRect().height)
+        // console.log(arr[i])
         this.isShow.push(false)
       }
     },
