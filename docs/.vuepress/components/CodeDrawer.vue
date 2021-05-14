@@ -2,29 +2,24 @@
   <div>
     <div class="component-wrapper">
       <div class="component-wrapper-demo">
-        <!--
-        组件展示位置
-        -->
-        <slot :name="slotName"></slot>
+        <slot :name="slotName">组件展示位置</slot>
       </div>
       <Drawer :isShowCodeContent.sync="showCodeContent"></Drawer>
-      <div class="code-content" style="height: 0">
+      <div class="code-content">
         <!--
         <div class="code-user-desc">
           组件描述说明
         </div>
         -->
         <div class="code-content-height" v-show="showCodeContent">
-          <!--
           <div class="code-user-desc">
-            组件代码
+            <pre v-highlightjs>
+              <code class="vue" v-text="codeStr"></code>
+            </pre>
           </div>
-          -->
-          <pre v-highlightjs>
-            <code class="vue" v-text="codeStr"></code>
-          </pre>
         </div>
       </div>
+
       <!--
       code drawer
       <div class="lock-code" @click="showCode(0)">
@@ -35,6 +30,7 @@
         <span class="lock-code-word">{{ isShow[0] === false ? '显示代码' : '隐藏代码' }}</span>
       </div>
       -->
+
     </div>
   </div>
 </template>
@@ -82,10 +78,6 @@ export default {
   border-radius: 3px;
   transition: 0.2s;
 
-  .component-wrapper-demo {
-    padding: 24px 24px 15px 24px;
-  }
-
   h4 {
     margin: 55px 0 20px;
   }
@@ -106,10 +98,14 @@ export default {
     0 2px 4px 0 rgba(232, 237, 250, 0.5);
   }
 
+  .component-wrapper-demo {
+    padding: 24px 24px 15px 24px;
+  }
+
   .code-content {
     background-color: #fafafa;
     border-top: 1px solid #eaeefb;
-    overflow: hidden;
+    //overflow: hidden;
     transition: height 0.2s;
     margin: 0;
     padding: 0;
@@ -195,4 +191,5 @@ export default {
   border-radius: 6px;
   background-color: #f5f5f5;
 }
+
 </style>
