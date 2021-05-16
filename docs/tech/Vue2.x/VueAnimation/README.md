@@ -70,7 +70,44 @@ next: /tech/Vue2.x/VuePress/
 ---
 
 <ClientOnly>
-  <code-drawer slotName="AnimeJS" :showIndex="1" :resourceCode='`<h2>FkWd</h2>`'>
+  <code-drawer slotName="AnimeJS" :showIndex="1" :resourceCode='`
+<template>
+  <div class="hello">
+    <h3>AnimeJS</h3>
+    <hr>
+    <button @click="go">Click Here to Animate</button>
+    <h3 ref="square">hello</h3>
+  </div>
+</template>
+<script>
+import anime from "animejs";
+export default {
+  name: "AnimeJS",
+  data() {
+    return {
+      show: true,
+    };
+  },
+  methods: {
+    go() {
+      // console.log(anime);
+      // bug fix: disable button when anime run
+      anime({
+        targets: this.$refs.square,
+        translateX: 300,
+        translateZ: 0,
+        easing: "easeInOutQuad",
+        direction: "alternate",
+      });
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+h3 {
+  margin: 40px 0 0;
+}
+</style> `'>
   <template v-slot:AnimeJS>
     <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
   </template>
@@ -80,7 +117,8 @@ next: /tech/Vue2.x/VuePress/
 ---
 
 <ClientOnly>
-  <code-drawer slotName="AnimeJS" :showIndex="2" :resourceCode='`<h2>FkWd</h2>`'>
+  <code-drawer slotName="AnimeJS" :showIndex="2" :resourceCode='`
+<h2>FkWd</h2> `'>
   <template v-slot:AnimeJS>
     <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
   </template>
@@ -466,7 +504,6 @@ yarn add velocity-animate
 ::: demo CSS animate.css@3.6.1
 
 ```html
-
 <template>
   <div class="hello">
     <button @click="go">Click Here to Animate</button>
@@ -483,7 +520,7 @@ export default {
   },
   methods: {
     go() {
-      console.log(anime);
+      // console.log(anime);
       /*        anime({
                 targets: this.$refs.square,
                 translateX: 300,
@@ -494,7 +531,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
   .hello {
     height: 800px;
@@ -574,7 +610,7 @@ export default {
 - 范例：给列表添加增加过度
   - `ul` 里的 `li` 套上`transition-group`  加上`name="fade"`
 
-```vue
+```html
 <transition-group name="fade">
     <div v-for="c in courses" :key="c.name">
         {{ c.name }} - ￥{{c.price}}

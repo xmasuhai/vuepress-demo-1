@@ -16,23 +16,16 @@ export default {
         if (this.isShow[index] === true) {
           this.codeParent[index].style.height =
             + this.codeHeightArr[index] + 'px'
-        } else {
-          this.codeParent[index].style.height = '0'
         }
-        console.log(this.codeParent)
-        console.log(this.codeParent[index].style.height)
       })
     },
-    // 得到所有代码区域的高度
+    // 得到所有代码区域的DOM 得到所有代码区域的高度
     getCodesHeight() {
       const arr = document
         .getElementsByClassName('code-content-height')
       this.codeParent = document
         .getElementsByClassName('code-content')
       const arrLength = arr.length
-      // console.log(arrLength)
-      // console.log(arr)
-      // console.log(this.isShow)
       for (let i = 0; i < arrLength; i++) {
         this.codeHeightArr
           .push(arr[i].getBoundingClientRect().height)
