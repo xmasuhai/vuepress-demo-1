@@ -116,17 +116,6 @@ h3 {
 
 ---
 
-<ClientOnly>
-  <code-drawer slotName="AnimeJS" :resourceCode='`
-<h2>FkWd</h2> `'>
-  <template v-slot:AnimeJS>
-    <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
-  </template>
-  </code-drawer>
-</ClientOnly>
-
----
-
 ::: demo CSS transition
 
 ```vue
