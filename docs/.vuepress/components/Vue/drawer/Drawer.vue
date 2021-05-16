@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import '/docs/.vuepress/public/svgs/iconfont.js'
 export default {
   name: 'drawer',
   data() {
