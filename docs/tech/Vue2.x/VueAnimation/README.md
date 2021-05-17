@@ -69,53 +69,6 @@ next: /tech/Vue2.x/VuePress/
 
 ---
 
-<ClientOnly>
-  <code-drawer slotName="AnimeJS" :resourceCode='`
-<template>
-  <div class="hello">
-    <h3>AnimeJS</h3>
-    <hr>
-    <button @click="go">Click Here to Animate</button>
-    <h3 ref="square">hello</h3>
-  </div>
-</template>
-<script>
-import anime from "animejs";
-export default {
-  name: "AnimeJS",
-  data() {
-    return {
-      show: true,
-    };
-  },
-  methods: {
-    go() {
-      // console.log(anime);
-      // bug fix: disable button when anime run
-      anime({
-        targets: this.$refs.square,
-        translateX: 300,
-        translateZ: 0,
-        easing: "easeInOutQuad",
-        direction: "alternate",
-      });
-    },
-  },
-};
-</script>
-<style lang="scss" scoped>
-h3 {
-  margin: 40px 0 0;
-}
-</style> `'>
-  <template v-slot:AnimeJS>
-    <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
-  </template>
-  </code-drawer>
-</ClientOnly>
-
----
-
 ::: demo CSS transition
 
 ```vue
@@ -177,6 +130,8 @@ p {
 ```
 
 :::
+
+---
 
 - 用`<transition></transition>`包裹需要加动画的节点
 - 设置属性`name`: `<transition name="fade">`
@@ -474,6 +429,7 @@ yarn add velocity-animate
 - [中文文档](https://www.animejs.cn/documentation/)
   - [Anime.js Demo](https://www.animejs.cn/demo/)
   - [文档 Demo](https://www.animejs.cn/documentation/)
+- 安装 `"animejs": "^3.2.1"`(如果装TS 还需`"@types/animejs": "^3.1.3"`)
 
 > 参考文章
 
@@ -488,72 +444,52 @@ yarn add velocity-animate
 - [webpack - 如何在Vue-Cli项目中使用anime.js(或任何外部库)？](https://www.coder.work/article/1328687)
 - [如何将anime.js导入我的Vue项目？](https://www.thinbug.com/q/49258336)
 
-> 用例 安装 `"animejs": "^3.2.1"`(如果装TS 还需`"@types/animejs": "^3.1.3"`)
+> 用例
 
-::: demo CSS animate.css@3.6.1
-
-```html
+<ClientOnly>
+  <code-drawer slotName="AnimeJS" :resourceCode='`
 <template>
   <div class="hello">
+    <h3>AnimeJS</h3>
+    <hr>
     <button @click="go">Click Here to Animate</button>
-    <div class="block" ref="square"></div>
+    <h3 ref="square">hello</h3>
   </div>
 </template>
-
 <script>
+import anime from "animejs";
 export default {
+  name: "AnimeJS",
   data() {
     return {
-      show: true
-    }
+      show: true,
+    };
   },
   methods: {
     go() {
       // console.log(anime);
-      /*        anime({
-                targets: this.$refs.square,
-                translateX: 300,
-                translateZ: 0,
-                easing: 'easeInOutQuad',
-              });*/
-    }
-  }
-}
+      // bug fix: disable button when anime run
+      anime({
+        targets: this.$refs.square,
+        translateX: 300,
+        translateZ: 0,
+        easing: "easeInOutQuad",
+        direction: "alternate",
+      });
+    },
+  },
+};
 </script>
-<style scoped>
-  .hello {
-    height: 800px;
-    }
-  h3 {
-    margin: 40px 0 0;
-    }
-  ul {
-    list-style-type: none;
-    padding: 0;
-    }
-  li {
-    display: inline-block;
-    margin: 0 10px;
-    }
-  p {
-    font-size: 60px;
-    color: #42b983;
-    }
-  .block {
-    pointer-events: none;
-    position: relative;
-    width: 128px;
-    height: 128px;
-    margin: 1px;
-    background-color: currentColor;
-    font-size: 12px;
-    color: #2c3e50;
-    }
-</style>
-
-```
-
-:::
+<style lang="scss" scoped>
+h3 {
+  margin: 40px 0 0;
+}
+</style> `'>
+  <template v-slot:AnimeJS>
+    <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
+  </template>
+  </code-drawer>
+</ClientOnly>
 
 ---
 
