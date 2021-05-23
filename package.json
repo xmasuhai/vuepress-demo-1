@@ -19,6 +19,8 @@
   },
   "main": "index.js",
   "dependencies": {
+    "@vssue/api-github-v3": "^1.4.7",
+    "@vssue/vuepress-plugin-vssue": "^1.4.8",
     "@vue/cli": "^4.5.12",
     "@vuepress/plugin-back-to-top": "^1.8.2",
     "animate.css": "3.6.1",

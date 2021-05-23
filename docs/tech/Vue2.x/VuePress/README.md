@@ -54,7 +54,7 @@ yarn init -y
 
 #### 命令行手动创建如下结构
 
-```sh
+```
 vuepress-demo
 ├─package.json
 ├─docs
