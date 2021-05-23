@@ -3,7 +3,7 @@ module.exports = {
   description: '收集关于前端的Demo',
   head: [
     // 注入到当前页面的 HTML <head> 中的标签
-    ['link', {rel: 'icon', href: '/images/favicon.png'}]
+    ['link', { rel: 'icon', href: '/images/favicon.png' }]
   ],
   dest: './dist',
   base: '/vuepress-demo-1-website/',
@@ -16,10 +16,10 @@ module.exports = {
     logo: '/images/Logo.jpg',
     // 导航栏配置
     nav: [
-      {text: '首页', link: '/'},
-      {text: '前端体系目录', link: '/hierarchy/'},
-      {text: '面经', link: '/interview/'},
-      {text: '我的博客', link: 'http://xmasuhai.xyz'},
+      { text: '首页', link: '/' },
+      { text: '前端体系目录', link: '/hierarchy/' },
+      { text: '面经', link: '/interview/' },
+      { text: '我的博客', link: 'http://xmasuhai.xyz' },
     ],
     // 侧边栏配置
     sidebar: 'auto',
@@ -28,6 +28,16 @@ module.exports = {
     lastUpdated: 'Last Updated',
   },
   plugins: [
+    [
+      '@vssue/vuepress-plugin-vssue',
+      {
+        platform: 'github',
+        owner: 'OWNER_OF_REPO',
+        repo: 'NAME_OF_REPO',
+        clientId: 'YOUR_CLIENT_ID',
+        clientSecret: 'YOUR_CLIENT_SECRET',
+      },
+    ],
     '@vuepress/back-to-top',
     'demo-container',
     [
