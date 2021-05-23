@@ -621,12 +621,6 @@ export default {
 
 ---
 
-<no-ssr>
-  <Vssue title="我的评论"/> 
-</no-ssr>
-
----
-
 > 参考
 
 - codepen
@@ -634,9 +628,6 @@ export default {
 - [vue中使用animate.css实现动画](https://www.jianshu.com/p/2e0b2f8d40cf/)
 - [5分钟学会Vue动画效果](https://juejin.cn/post/6844903636888207373/)
 - [优美的v-for列表加载动画：vue动画钩子实践](https://juejin.cn/post/6869195042599206919)
-
----
-
 
 ---
 ---
