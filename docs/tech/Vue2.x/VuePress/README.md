@@ -31,7 +31,7 @@ title: VuePress使用实践
 ```sh
 #安装VuePress
 yarn add global vuepress
-## for Vue3.x
+## for vue3.x
 ## yarn add global vuepress@next
 
 # 创建并进入项目

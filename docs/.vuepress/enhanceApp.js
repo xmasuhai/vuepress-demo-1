@@ -5,17 +5,17 @@ import anime from 'animejs';
 
 import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/atom-one-dark.css'
-
 export default ({
-                  Vue,
-                  /*
-                  options,
-                  router,
-                  siteData
-                  */
-                }) => {
+Vue,
+/*
+options,
+router,
+siteData
+*/
+}) => {
   Vue.use(anime);
-  Vue.use(VueHighlightJS)
+  Vue.use(VueHighlightJS);
+
   setTimeout(() => {
     // 对document的判断是防止编译的时候报错
     try {

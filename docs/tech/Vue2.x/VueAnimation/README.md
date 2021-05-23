@@ -543,7 +543,7 @@ h3 {
 </transition-group>
 ```
 
-css加动画效果
+- css加动画效果
 
 ```scss
 .fade-enter,.fade-leave-to{
@@ -603,43 +603,9 @@ export default {
 - CSS在第三方库中预设好了
 - 添加属性`enter-active-class` `leave-active-class`
   - `<transition enter-active-class="animated tada" leave-active-class="animated bounceOutRight">`
-- [官网](https://animate.style/#custom-builds)
+- [animate.css 官网](https://animate.style/#custom-builds)
 
 ---
-
-### ``
-
-```html
-<template>
-<div>
-</div>
-</template>
-
-<script>
-</script>
-
-<style lang="scss" scoped>
-</style>
-
-```
-
----
-
-### `Example`
-
-```html
-<template>
-<div>
-</div>
-</template>
-
-<script>
-</script>
-
-<style lang="scss" scoped>
-</style>
-
-```
 
 ---
 
@@ -655,6 +621,12 @@ export default {
 
 ---
 
+<no-ssr>
+  <Vssue title="我的评论"/> 
+</no-ssr>
+
+---
+
 > 参考
 
 - codepen
@@ -662,6 +634,9 @@ export default {
 - [vue中使用animate.css实现动画](https://www.jianshu.com/p/2e0b2f8d40cf/)
 - [5分钟学会Vue动画效果](https://juejin.cn/post/6844903636888207373/)
 - [优美的v-for列表加载动画：vue动画钩子实践](https://juejin.cn/post/6869195042599206919)
+
+---
+
 
 ---
 ---

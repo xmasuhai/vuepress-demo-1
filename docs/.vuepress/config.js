@@ -31,12 +31,14 @@ module.exports = {
     [
       '@vssue/vuepress-plugin-vssue',
       {
-        platform: 'github',
-        owner: 'OWNER_OF_REPO',
-        repo: 'NAME_OF_REPO',
-        clientId: 'YOUR_CLIENT_ID',
-        clientSecret: 'YOUR_CLIENT_SECRET',
-      },
+        platform: 'github-v4',
+        owner: 'xmasuhai',
+        repo: 'https://github.com/xmasuhai/vuepress-demo-1-website-vssue',
+        clientId: '63cb0091b6a9f4eac236',
+        clientSecret: 'f3f9ae5ba6a36647a2854dd0b10e635ccbdbf363',
+        locale: 'zh',
+        autoCreateIssue: true,
+      }
     ],
     '@vuepress/back-to-top',
     'demo-container',
