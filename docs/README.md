@@ -14,3 +14,7 @@ features:
   details: 这只是开始...
 footer: Vue Demo
 ---
+
+<Vssue title="First Issue"/>
+
+---

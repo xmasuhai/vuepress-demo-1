@@ -33,7 +33,7 @@ module.exports = {
       {
         platform: 'github-v4',
         owner: 'xmasuhai',
-        repo: 'https://github.com/xmasuhai/vuepress-demo-1-website-vssue',
+        repo: 'vuepress-demo-1-website-vssue',
         clientId: '63cb0091b6a9f4eac236',
         clientSecret: 'f3f9ae5ba6a36647a2854dd0b10e635ccbdbf363',
         locale: 'zh',

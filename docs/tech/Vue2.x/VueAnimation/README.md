@@ -621,12 +621,6 @@ export default {
 
 ---
 
-<no-ssr>
-  <Vssue title="我的评论"/> 
-</no-ssr>
-
----
-
 > 参考
 
 - codepen
@@ -637,6 +631,7 @@ export default {
 
 ---
 
+<Vssue title="我的评论"/> 
 
 ---
 ---
