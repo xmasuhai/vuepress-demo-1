@@ -7,7 +7,7 @@
       <Drawer :isShowCodeContent.sync="showCodeContent"></Drawer>
       <div class="code-content">
         <div class="code-content-height" v-show="showCodeContent">
-          <div class="code-user-desc"> 组件描述说明 </div>
+          <div class="code-user-desc"> 组件描述说明</div>
           <pre v-highlightjs>
             <code class="vue" v-text="codeStr"></code>
           </pre>
@@ -49,7 +49,7 @@ export default {
 
   h4 {
     margin: 55px 0 20px;
-    }
+  }
 
   &:hover,
   &::v-deep:hover {
@@ -57,19 +57,19 @@ export default {
       font-size: 14px;
       transform: translateX(-40px);
       opacity: 1;
-      }
+    }
 
     .lock-code .icon-hover {
       transform: translateX(-40px);
-      }
+    }
 
     box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
     0 2px 4px 0 rgba(232, 237, 250, 0.5);
-    }
+  }
 
   .component-wrapper-demo {
     padding: 24px 24px 15px 24px;
-    }
+  }
 
   .lock-code {
     border-top: 1px solid #eaeefb;
@@ -90,18 +90,18 @@ export default {
 
       .lock-code-word {
         color: #409eff;
-        }
+      }
 
       .icon-hover {
         fill: #409eff;
         color: #409eff;
-        }
       }
+    }
 
     .icon-hover {
       transform: translateX(0px);
       transition: all 0.1s;
-      }
+    }
 
     .lock-code-word {
       font-size: 0;
@@ -109,8 +109,8 @@ export default {
       display: inline-block;
       transition: all 0.1s;
       opacity: 0;
-      }
     }
+  }
 
   .code-content {
     background-color: #fafafa;
@@ -131,7 +131,7 @@ export default {
         line-height: 26px;
         border: 1px solid #ebebeb;
         border-radius: 3px;
-        }
+      }
 
       > pre {
         background: none;
@@ -140,25 +140,25 @@ export default {
 
         > code {
           color: #3182bd;
-          }
         }
       }
     }
-
   }
+
+}
 
 ::-webkit-scrollbar {
   width: 8px;
   background-color: #f5f5f5;
-  }
+}
 
 ::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: #ccc;
-  }
+}
 
 ::-webkit-scrollbar-track {
   border-radius: 6px;
   background-color: #f5f5f5;
-  }
+}
 </style>

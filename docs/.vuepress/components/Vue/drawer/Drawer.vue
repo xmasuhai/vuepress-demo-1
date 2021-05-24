@@ -12,6 +12,7 @@
 
 <script>
 import '/docs/.vuepress/public/svgs/iconfont.js'
+
 export default {
   name: 'drawer',
   data() {
@@ -56,26 +57,26 @@ export default {
       font-size: 14px;
       transform: translateX(-40px);
       opacity: 1;
-      }
+    }
 
     .lock-code .icon-hover {
       transform: translateX(-40px);
-      }
+    }
 
     .lock-code-word {
       color: #409eff;
-      }
+    }
 
     .icon-hover {
       fill: #409eff;
       color: #409eff;
-      }
     }
+  }
 
   .icon-hover {
     transform: translateX(0px);
     transition: all .1s;
-    }
+  }
 
   .lock-code-word {
     font-size: 0;
@@ -83,7 +84,7 @@ export default {
     display: inline-block;
     transition: all .1s;
     opacity: 0;
-    }
   }
+}
 
 </style>
