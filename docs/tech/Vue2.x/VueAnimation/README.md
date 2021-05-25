@@ -499,19 +499,68 @@ h3 {
 
 ## Vue动画方式4 - 多元素动画
 
+::: demo 多个元素的过渡 animation
+
 ```vue
 <template>
 <div>
+  <transition name="fadeSwitch" mode="in-out">
+    <button :key="isEditing" @click="isEditing = ! isEditing">
+      {{isEditing? 'Save' : 'Edit'}}
+    </button>
+  </transition>
+  <hr>
+  <transition name="fadeSwitch" mode="out-in">
+    <button :key="docState" @click="switchingDocState">
+      {{ buttonMessage }}
+    </button>
+  </transition>
 </div>
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      isEditing: true,
+      docState: 'saved'
+    }
+  },
+  computed: {
+    buttonMessage: function () {
+      switch (this.docState) {
+        case 'saved':
+          return 'Edit'
+        case 'edited':
+          return 'Save'
+        case 'editing':
+          return 'Cancel'
+      }
+    }
+  },
+  methods: {
+    switchingDocState() {
+      
+    }
+  }
+}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.fadeSwitch-enter-active,
+.fadeSwitch-leave-active {
+  transition: all 3s;
+}
+.fadeSwitch-enter,
+.fadeSwitch-leave-to {
+  opacity: 0;
+  tansform: translateY(30px);
+}
 </style>
 
 ```
+
+:::
 
 ---
 
