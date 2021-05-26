@@ -499,72 +499,27 @@ h3 {
 
 ## Vue动画方式4 - 多元素动画
 
-::: demo 多个元素的过渡 animation
+> 例子
 
-```vue
+<ClientOnly>
+  <code-drawer infoText="多元素动画" slotName="CSS_multiElement" :resourceCode='`
 <template>
-<div>
+  <h2>Toggle "Save" & "Edit"</h2>
   <transition name="fadeSwitch" mode="in-out">
     <button :key="isEditing" @click="isEditing = ! isEditing">
-      {{isEditing? 'Save' : 'Edit'}}
+      {{isEditing? "Save" : "Edit"}}
     </button>
   </transition>
-  <hr>
-  <transition name="fadeSwitch" mode="out-in">
-    <button :key="docState" @click="switchingDocState">
-      {{ buttonMessage }}
-    </button>
-  </transition>
-</div>
+</template>`'>
+<template v-slot:CSS_multiElement>
+  <Vue-Animation-MultiElement></Vue-Animation-MultiElement>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      isEditing: true,
-      docState: 'saved'
-    }
-  },
-  computed: {
-    buttonMessage: function () {
-      switch (this.docState) {
-        case 'saved':
-          return 'Edit'
-        case 'edited':
-          return 'Save'
-        case 'editing':
-          return 'Cancel'
-      }
-    }
-  },
-  methods: {
-    switchingDocState() {
-      
-    }
-  }
-}
-</script>
-
-<style scoped>
-.fadeSwitch-enter-active,
-.fadeSwitch-leave-active {
-  transition: all 3s;
-}
-.fadeSwitch-enter,
-.fadeSwitch-leave-to {
-  opacity: 0;
-  tansform: translateY(30px);
-}
-</style>
-
-```
-
-:::
+  </code-drawer>
+</ClientOnly>
 
 ---
 
-## Vue动画5方式 - 列表动画
+## Vue动画方式 5 - 列表动画
 
 ```vue
 <template>
