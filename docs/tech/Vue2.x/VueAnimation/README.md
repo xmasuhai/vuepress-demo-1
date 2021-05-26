@@ -485,9 +485,9 @@ h3 {
   margin: 40px 0 0;
 }
 </style> `'>
-  <template v-slot:AnimeJS>
-    <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
-  </template>
+<template v-slot:AnimeJS>
+<Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
+</template>
   </code-drawer>
 </ClientOnly>
 
@@ -504,15 +504,76 @@ h3 {
 <ClientOnly>
   <code-drawer infoText="多元素动画" slotName="CSS_multiElement" :resourceCode='`
 <template>
-  <h2>Toggle "Save" & "Edit"</h2>
-  <transition name="fadeSwitch" mode="in-out">
-    <button :key="isEditing" @click="isEditing = ! isEditing">
-      {{isEditing? "Save" : "Edit"}}
-    </button>
-  </transition>
-</template>`'>
+  <div>
+    <h2>Toggle "Save" & "Edit"</h2>
+    <transition name="fadeSwitch" mode="out-in">
+      <button :key="isEditing" @click="isEditing = ! isEditing">
+        {{ isEditing ? "Save" : "Edit" }}
+      </button>
+    </transition>
+    <hr>
+    <h2>Toggle "Save" & "Edit" & "Cancel"</h2>
+    <transition name="fadeSwitch" mode="out-in">
+      <button :key="docState" @click="switchingDocState">
+        {{ buttonMessage }}
+      </button>
+    </transition>
+  </div>
+</template>
+<script>
+export default {
+  name: "Slide",
+  data() {
+    return {
+      isEditing: true,
+      docStateList: ["saved", "edited", "editing"],
+      docState: "saved",
+      tempList: [],
+      stateCount: 0
+    }
+  },
+  computed: {
+    buttonMessage: {
+      get: function () {
+        return {
+          "saved": "Edit",
+          "edited": "Save",
+          "editing": "Cancel",
+        }[this.docState]
+      },
+      set: function (state) {
+        this.docState = state
+      }
+    }
+  },
+  beforeMount() {
+    this.tempList = [...this.docStateList]
+  },
+  methods: {
+    switchingDocState() {
+      this.docState = this.tempList.pop();
+      if(this.tempList.length === 0) {
+        this.tempList = [...this.docStateList]
+      }
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.fadeSwitch-enter-active {
+  transition: all .3s ease;
+}
+.fadeSwitch-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fadeSwitch-enter, .fadeSwitch-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+</style>
+`'>
 <template v-slot:CSS_multiElement>
-  <Vue-Animation-MultiElement></Vue-Animation-MultiElement>
+<Vue-Animation-MultiElement></Vue-Animation-MultiElement>
 </template>
   </code-drawer>
 </ClientOnly>
