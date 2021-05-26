@@ -7,7 +7,7 @@
       <Drawer :isShowCodeContent.sync="showCodeContent"></Drawer>
       <div class="code-content">
         <div class="code-content-height" v-show="showCodeContent">
-          <div class="code-user-desc"> 组件描述说明</div>
+          <div class="code-user-desc"> {{ (slotName + ' ' + infoText) || "组件描述说明" }} </div>
           <pre v-highlightjs>
             <code class="vue" v-text="codeStr"></code>
           </pre>
@@ -36,6 +36,10 @@ export default {
     },
     resourceCode: {
       type: String,
+    },
+    infoText: {
+      type: String,
+      default: ''
     },
   },
 }
