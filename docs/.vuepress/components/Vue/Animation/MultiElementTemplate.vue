@@ -8,7 +8,6 @@
         </button>
       </transition>
     </div>
-    <hr>
   </div>
 </template>
 

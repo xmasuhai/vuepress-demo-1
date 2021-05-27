@@ -32,17 +32,6 @@ export default {
 
 <style lang="scss" scoped>
 .twoElements::v-deep {
-  .fadeSwitch-enter-active, {
-    transition: all .3s ease;
-  }
-
-  .fadeSwitch-leave-active, {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-
-  .fadeSwitch-enter, .fadeSwitch-leave-to {
-    transform: translateY(20px);
-    opacity: 0;
-  }
+  @import "../../../common/MultiElements.scss";
 }
 </style>

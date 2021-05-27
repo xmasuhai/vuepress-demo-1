@@ -20,31 +20,6 @@ export default {
 
 <style lang="scss" scoped>
 .threeElements::v-deep {
-  .pose {
-    position: relative;
-    padding: 100px;
-
-    & > button {
-      position: absolute;
-    }
-
-    .carousel-enter-active {
-      transition: all .3s ease;
-    }
-
-    .carousel-leave-active {
-      transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-
-    .carousel-enter {
-      transform: translateX(100px);
-      opacity: 0;
-    }
-
-    .carousel-leave-to {
-      transform: translateX(-150px);
-      opacity: 0;
-    }
-  }
+  @import "../../../common/MultiElements.scss";
 }
 </style>

@@ -29,7 +29,7 @@ next: /tech/Vue2.x/VuePress/
 
 ---
 
-## Vue动画方式1 - CSS transition
+## Vue动画方式1 - `CSS transition`
 
 - Vue 提供封装的`<transition name="xxx"></transition>`标签，在标签内写需要设置动画的节点
 - 给任何元素/组件 添加 **进入/离开** 过渡效果
@@ -42,7 +42,7 @@ next: /tech/Vue2.x/VuePress/
   - `xxx-leave-active`
   - `xxx-enter`
   - `xxx-leave-to`
-- 注意样式隔离
+- 注意样式隔离（例如设置`name="fade"`）
   - `.fade-enter-active, .fade-leave-active {}`
   - `.fade-enter, .fade-leave-to {}`
 - 一些 UI 组件库的CSS全局样式会污染默认样式
@@ -61,9 +61,9 @@ next: /tech/Vue2.x/VuePress/
   </div>
 </template>
 `'>
-  <template v-slot:CSS_transition>
-    <Vue-Animation-Transition></Vue-Animation-Transition>
-  </template>
+    <template v-slot:CSS_transition>
+      <Vue-Animation-Transition></Vue-Animation-Transition>
+    </template>
   </code-drawer>
 </ClientOnly>
 
@@ -147,7 +147,7 @@ p {
 
 - 淡入的第一帧 `.v-enter` 元素插入前生效的样式，插入后下一帧删除
 - 进入过度生效时状态 `.v-enter-active` 过渡/动画中 `.v-active {transition: all 2s;}` 此时使用`transition`过渡
-- 进入过度结束状态`.v-enter-to` 淡入最后一帧 添加样式\
+- 进入过度结束状态`.v-enter-to` 淡入最后一帧 添加样式
 - 一般不需要`.v-enter-to`或`.v-leave`，结束状态即初始状态
 - 完成过渡，删除所有过渡`v`的样式，只保留元素自身的样式
 - `v-leave` -> `v-leave-active` -> `v-leave-to` 离开过渡
@@ -208,11 +208,11 @@ export default {
 
 > 小结
 
-- `<transition name="">` 标签
+- `<transition name="xxx">` 标签
 - 切换条件`v-if` / `v-show`
 - 样式
   - 元素自身样式
-  - 添加初始样式（in / out）
+  - 添加初始样式（`in / out`）
   - 添加过渡属性
     - `transition: transition-property，transition-duration，transition-timing-function transition-delay ;`
 
@@ -220,7 +220,11 @@ export default {
 
 > 在`codepen`可以快速尝试适合的依赖环境
 
+---
+
 ## Vue动画方式2- CSS animation
+
+> 使用方法
 
 - 同样使用`<transition name="xxx">` 标签，`name="xxx"`为类样式前缀
 - 区别于`CSS transition` 过渡属性
@@ -234,6 +238,8 @@ export default {
     - 在`@keyframes`中 设置关键帧（`to / from / 0% / 100%`）代替`enter / leave`
   - `reverse`反向淡出动画，设置`.xxx-leave.active{animation: animationName 1s reverse}`
   - 保证最终状态即正常状态
+
+---
 
 ::: demo CSS animation
 
@@ -318,6 +324,8 @@ export default {
   - 将可以正常运行的版本号作为`yarn add -D xxx@***`的依据
   - 导入入口文件`import ...*.js/ts`
 
+---
+
 > `Vue2.x`运行环境（经过在`codepen`中的测试）
 
 - `@vue/cli-plugin-babel@4.1.1`
@@ -378,6 +386,11 @@ export default {
 ```
 
 :::
+
+- CSS 动画样式在第三方库中已预设
+- 添加属性`enter-active-class` `leave-active-class`
+  - `<transition enter-active-class="animated tada" leave-active-class="animated bounceOutRight">`
+- [官网](https://animate.style/#custom-builds)
 
 ---
 
@@ -444,7 +457,7 @@ yarn add velocity-animate
 - [webpack - 如何在Vue-Cli项目中使用anime.js(或任何外部库)？](https://www.coder.work/article/1328687)
 - [如何将anime.js导入我的Vue项目？](https://www.thinbug.com/q/49258336)
 
-> 用例
+> 用例 安装 `"animejs": "^3.2.1"`(如果装TS 还需`"@types/animejs": "^3.1.3"`)
 
 <ClientOnly>
   <code-drawer slotName="AnimeJS" :resourceCode='`
@@ -484,6 +497,28 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+p {
+  font-size: 60px;
+  color: #42b983;
+}
+.block {
+  pointer-events: none;
+  position: relative;
+  width: 128px;
+  height: 128px;
+  margin: 1px;
+  background-color: currentColor;
+  font-size: 12px;
+  color: #2c3e50;
+}
 </style> `'>
 <template v-slot:AnimeJS>
 <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
@@ -498,6 +533,11 @@ h3 {
 ---
 
 ## Vue动画方式4 - 多元素动画
+
+- 在`<transition>`标签中使用过渡模式`mode="out-in"`，先退出，再进入
+- 多个相同结构元素，合并，使用动态绑定`:key`区分，代替`v-if`
+- 如果使用过渡模式过渡模式`mode="in-out"`，需要将元素设置为绝对定位
+- 轮播效果无需设置过渡模式
 
 > 例子
 
