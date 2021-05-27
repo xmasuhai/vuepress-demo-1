@@ -518,6 +518,25 @@ h3 {
         {{ buttonMessage }}
       </button>
     </transition>
+    <hr>
+    <h2>Mode in-out</h2>
+    <hr>
+    <div class="pose">
+      <transition name="carousel" mode="in-out">
+        <button :key="docState" @click="switchingDocState">
+          {{ buttonMessage }}
+        </button>
+      </transition>
+    </div>
+    <h2>Toggle Carousel with no mode</h2>
+    <div class="pose">
+      <transition name="carousel">
+        <button :key="docState" @click="switchingDocState">
+          {{ buttonMessage }}
+        </button>
+      </transition>
+    </div>
+  </div>
   </div>
 </template>
 <script>
@@ -573,7 +592,7 @@ export default {
 </style>
 `'>
 <template v-slot:CSS_multiElement>
-<Vue-Animation-MultiElement></Vue-Animation-MultiElement>
+<Vue-Animation-MultiElements></Vue-Animation-MultiElements>
 </template>
   </code-drawer>
 </ClientOnly>
