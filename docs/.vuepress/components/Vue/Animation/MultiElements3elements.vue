@@ -12,44 +12,10 @@
 </template>
 
 <script>
-import MultiElementTemplate from "./MultiElementTemplate";
-
+import multiElements from '/docs/.vuepress/mixins/MultiElements.js';
 export default {
   name: "MultiElements3elements",
-  components: {MultiElementTemplate},
-  data() {
-    return {
-      docStateList: ['saved', 'edited', 'editing'],
-      docState: 'saved',
-      tempList: [],
-      stateCount: 0
-    }
-  },
-  computed: {
-    buttonMessage: {
-      get: function () {
-        return {
-          'saved': 'Edit',
-          'edited': 'Save',
-          'editing': 'Cancel',
-        }[this.docState]
-      },
-      set: function (state) {
-        this.docState = state
-      }
-    }
-  },
-  beforeMount() {
-    this.tempList = [...this.docStateList]
-  },
-  methods: {
-    switchingDocState() {
-      this.docState = this.tempList.pop();
-      if (this.tempList.length === 0) {
-        this.tempList = [...this.docStateList]
-      }
-    }
-  }
+  mixins: [multiElements]
 }
 </script>
 
