@@ -26,16 +26,16 @@ export default {
   .fade-enter-active,
   .fade-leave-active {
     transition: all 1s;
-    }
+  }
 
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
     width: 100px;
-    }
+  }
 
   p {
     width: 300px;
-    }
   }
+}
 </style>
