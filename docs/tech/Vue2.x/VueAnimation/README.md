@@ -800,6 +800,15 @@ export default {
   </code-drawer>
 </ClientOnly>
 
+- 注意：不要在`<transition>`标签内写JS行内表达式，而是要写到方法`methods`中
+- 否则会引起无线循环渲染报错` [Vue warn]: You may have an infinite update loop in a component render function `
+
+---
+
+### 多个组件的过渡
+
+- 不需要使用 key attribute，使用动态组件
+
 ---
 
 ## Vue动画方式 5 - 列表动画
