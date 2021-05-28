@@ -159,24 +159,77 @@ p {
 
 ![pic](https://cn.vuejs.org/images/transition.png)
 
-> CSS transition 过渡 另一个例子
+### CSS transition 过渡 另一个例子 Slide
+
+---
+
+<ClientOnly>
+<code-drawer slotName="CSS_Slide" :resourceCode='`
+<template>
+  <div class="demoHeight">
+    <show-panel title="Slide"
+                transitionName="slide-fade"
+                showText="Slide Fade "
+    ></show-panel>
+  </div>
+</template>
+<script>
+import ShowPanel from "./ShowPanel.vue"
+export default {
+  name: "Slide",
+  components: {
+    ShowPanel
+  }
+}
+</script>
+<style lang="scss" scoped>
+.demoHeight {
+  height: 180px;
+}
+::v-deep {
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter,
+  .slide-fade-leave-to {
+    transform: translate3d(30px,30px,0px);
+    opacity: 0;
+  }
+  .animateTarget{
+    padding: 5px 5px 5px 0;
+  }
+}
+</style>
+`'>
+<template v-slot:CSS_Slide>
+<Vue-Animation-Slide></Vue-Animation-Slide>
+</template>
+</code-drawer>
+</ClientOnly>
+
+---
 
 ::: demo CSS transition
 
 ```vue
+
 <template>
-  <div class="fixHeight40">
-  <button @click="show = !show">
-    Toggle render
-  </button>
-  <transition name="slide-fade">
-    <p v-if="show">hello</p>
-  </transition>
-</div>
+  <div class="demoHeight">
+    <button @click="show = !show">
+      Toggle render
+    </button>
+    <transition name="slide-fade">
+      <p v-if="show">hello</p>
+    </transition>
+  </div>
 </template>
 
 <script>
 export default {
+  name: 'slide',
   data() {
     return {
       show: true
@@ -186,12 +239,14 @@ export default {
 </script>
 
 <style>
-.fixHeight40 {
+.demoHeight {
   height: 40px;
 }
+
 .slide-fade-enter-active {
   transition: all .3s ease;
 }
+
 .slide-fade-leave-active {
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
@@ -241,13 +296,76 @@ export default {
 
 ---
 
+<ClientOnly>
+<code-drawer slotName="CSS_Animation" :resourceCode='`
+<template>
+  <div class="demoHeight">
+    <show-panel title="CSS Animation"
+                transitionName="bounce"
+                buttonText="show animation"
+                :showText="showAnimation"
+    ></show-panel>
+  </div>
+</template>
+<script>
+import ShowPanel from "./ShowPanel.vue"
+export default {
+  name: "Animation",
+  data() {
+    return {
+      showAnimation: "
+      Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit.
+      Mauris facilisis enim libero,
+      at lacinia diam fermentum id.
+      Pellentesque habitant morbi tristique senectus et netus.
+      "
+    }
+  },
+  components: {
+    ShowPanel
+  }
+}
+</script>
+<style lang="scss" scoped>
+.demoHeight {
+  height: 300px;
+}
+::v-deep {
+  .bounce-enter-active {
+    animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+</style>`'>
+  <template v-slot:CSS_Animation>
+    <Vue-Animation-Animation></Vue-Animation-Animation>
+  </template>
+</code-drawer>
+</ClientOnly>
+
+---
+
 ::: demo CSS animation
 
 ```vue
 <template>
 <div class="fixHeight150">
   <button @click="showAnimation = !showAnimation">
-    Toggle show
+    show Animation
   </button>
   <transition name="bounce">
     <p v-if="showAnimation">
@@ -356,7 +474,30 @@ import 'animate.css'
 - 直接导入到入口文件`main.js/ts`中去：`import 'animate.css'`
 - 编译后会自动添加相应的`<style></style>`标签为全局样式
 
-> 例子
+> 例子 `animate.css`
+
+<ClientOnly>
+  <code-drawer slotName="CSS_AnimateCSS" :resourceCode='`
+  <template>
+    <div>
+      <show-panel class="panel"
+                  title="Transition"
+                  transitionName="fade"
+                  showText="Hello">
+      </show-panel>
+    </div>
+  </template>`'>
+    <template v-slot:CSS_AnimateCSS>
+      <Vue-Animation-AnimateCSS></Vue-Animation-AnimateCSS>
+    </template>
+  </code-drawer>
+</ClientOnly>
+
+---
+
+- HAHA
+
+---
 
 ::: demo CSS animate.css@3.6.1
 
@@ -808,6 +949,20 @@ export default {
 ### 多个组件的过渡
 
 - 不需要使用 key attribute，使用动态组件
+
+```vue
+<template>
+<div>
+</div>
+</template>
+
+<script>
+</script>
+
+<style lang="scss" scoped>
+</style>
+
+```
 
 ---
 

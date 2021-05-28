@@ -1,7 +1,6 @@
 <template>
   <div>
-    <show-panel class="panel"
-                title="Transition"
+    <show-panel title="Transition"
                 transitionName="fade"
                 showText="Hello">
     </show-panel>
@@ -10,11 +9,8 @@
 
 <script>
 import ShowPanel from './ShowPanel.vue'
-
 export default {
-  data() {
-    return {}
-  },
+  name: 'Transition',
   components: {
     ShowPanel
   },
@@ -27,13 +23,11 @@ export default {
   .fade-leave-active {
     transition: all 1s;
   }
-
   .fade-enter,
   .fade-leave-to {
     opacity: 0;
     width: 100px;
   }
-
   p {
     width: 300px;
   }
