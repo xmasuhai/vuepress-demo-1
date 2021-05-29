@@ -23,5 +23,4 @@ export default {
 .twoElements::v-deep {
   @import "../../../common/MultiElements.scss";
 }
-
 </style>

@@ -54,7 +54,6 @@ export default {
     },
     animationMode: {
       type: Boolean,
-      required: true,
       default: true,
     },
     animeEnterClassName: {

@@ -23,5 +23,4 @@ export default {
 .threeElements::v-deep {
   @import "../../../common/MultiElements.scss";
 }
-
 </style>

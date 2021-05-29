@@ -671,12 +671,53 @@ h3 {
 
 ## Vue动画方式4 - 多元素动画
 
-- 在`<transition>`标签中使用过渡模式`mode="out-in"`，先退出，再进入
-- 多个相同结构元素，合并，使用动态绑定`:key`区分，代替`v-if`
-- 如果使用过渡模式过渡模式`mode="in-out"`，需要将元素设置为绝对定位
+> 示例
+
+```vue
+<transition>
+  <article v-if="items.length > 0">
+    <!-- 多标签过渡是一个列表和描述这个列表为空消息的元素 -->
+  </article>
+  <p v-else>Sorry, no items found.</p>
+</transition>
+
+<!-- 相同标签名的元素切换 -->
+<transition>
+  <button v-if="isEditing" key="save">
+    Save
+  </button>
+  <button v-else key="edit">
+    Edit
+  </button>
+</transition>
+
+<!-- d多个标签名的元素切换 -->
+<transition>
+  <button v-if="docState === 'saved'" key="saved">
+    Edit
+  </button>
+  <button v-if="docState === 'edited'" key="edited">
+    Save
+  </button>
+  <button v-if="docState === 'editing'" key="editing">
+    Cancel
+  </button>
+</transition>
+```
+
+- 写在`<transition></transition>`标签上的属性 **过渡模式** `mode="out-in"`，先退出，再进入
+- `<transition></transition>`标签中包含 **原生标签**
+  - 对于**不同**标签名的元素切换
+    - 使用 `v-if/v-else`
+  - 对于**相同**标签名的元素切换
+    - 必须通过 `key attribute` 设置唯一的值来标记以让 `Vue` 区分
+    - 多个相同结构与属性的元素进行合并，使用动态绑定`:key`区分，代替`v-if/v-else`
+- 如果使用 **过渡模式** `mode="in-out"`，需要将元素设置为**绝对定位**
 - 轮播效果无需设置过渡模式
 
-> 例子
+---
+
+### 元素切换实例
 
 <ClientOnly>
   <code-drawer infoText="多元素动画" slotName="CSS_MultiElements2elements" :resourceCode='`
@@ -719,8 +760,7 @@ export default {
   opacity: 0;
   }
 }
-</style>`
-'>
+</style>`'>
 <template v-slot:CSS_MultiElements2elements>
 <Vue-Animation-MultiElements2elements></Vue-Animation-MultiElements2elements>
 </template>
@@ -805,8 +845,7 @@ export default {
     }
   }
 }
-</style>
-`'>
+</style>`'>
 <template v-slot:CSS_MultiElements3elements>
 <Vue-Animation-MultiElements3elements></Vue-Animation-MultiElements3elements>
 </template>
@@ -831,44 +870,11 @@ export default {
   </div>
 </template>
 <script>
-export default {
-  name: "MultiElementsModeInOut",
-  data() {
-    return {
-      docStateList: ["saved", "edited", "editing"],
-      docState: "saved",
-      tempList: [],
-      stateCount: 0
-    }
-  },
-  computed: {
-    buttonMessage: {
-      get: function () {
-        return {
-          "saved": "Edit",
-          "edited": "Save",
-          "editing": "Cancel",
-        }[this.docState]
-      },
-      set: function (state) {
-        this.docState = state
-      }
-    }
-  },
-  beforeMount() {
-    this.tempList = [...this.docStateList]
-  },
-  methods: {
-    switchingDocState() {
-      this.docState = this.tempList.pop();
-      if(this.tempList.length === 0) {
-        this.tempList = [...this.docStateList]
-      }
-    }
-  }
-}
+// 同上例 略
 </script>
-`'>
+<style lang="scss" scoped>
+/* 同上例 略 */
+</style>`'>
 <template v-slot:CSS_MultiElementsModeInOut>
 <Vue-Animation-MultiElementsModeInOut></Vue-Animation-MultiElementsModeInOut>
 </template>
@@ -893,44 +899,11 @@ export default {
   </div>
 </template>
 <script>
-export default {
-  name: "MultiElementsCarousel",
-  data() {
-    return {
-      docStateList: ["saved", "edited", "editing"],
-      docState: "saved",
-      tempList: [],
-      stateCount: 0
-    }
-  },
-  computed: {
-    buttonMessage: {
-      get: function () {
-        return {
-          "saved": "Edit",
-          "edited": "Save",
-          "editing": "Cancel",
-        }[this.docState]
-      },
-      set: function (state) {
-        this.docState = state
-      }
-    }
-  },
-  beforeMount() {
-    this.tempList = [...this.docStateList]
-  },
-  methods: {
-    switchingDocState() {
-      this.docState = this.tempList.pop();
-      if(this.tempList.length === 0) {
-        this.tempList = [...this.docStateList]
-      }
-    }
-  }
-}
+// 同上例 略
 </script>
-`'>
+<style lang="scss" scoped>
+/* 同上例 略 */
+</style>`'>
 <template v-slot:CSS_MultiElementsCarousel>
 <Vue-Animation-MultiElementsCarousel></Vue-Animation-MultiElementsCarousel>
 </template>
@@ -946,16 +919,88 @@ export default {
 
 - 不需要使用 `key attribute`，使用动态组件
 
+<ClientOnly>
+  <code-drawer infoText="多组件动画" slotName="CSS_MultiComponents" :resourceCode='`
+<template>
+  <div>
+    <button @click=view="AnimeJS">AnimeJS</button>
+    <button @click=view="Slide">Slide</button>
+    <transition name="component-fade" mode="out-in">
+      <component :is="view"></component>
+    </transition>
+  </div>
+</template>
+<script>
+import AnimeJS from "./AnimeJS";
+import Slide from "./Slide";
+export default {
+  name: "MultiComponents",
+  data() {
+    return {
+      view: "AnimeJS"
+    }
+  },
+  components: {
+    AnimeJS,
+    Slide
+  }
+}
+</script>
+<style lang="scss" scoped>
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to {
+  opacity: 0;
+}
+</style>`'>
+<template v-slot:CSS_MultiComponents>
+<Vue-Animation-MultiComponents></Vue-Animation-MultiComponents>
+</template>
+  </code-drawer>
+</ClientOnly>
+
+---
+
 ```vue
 <template>
-<div>
-</div>
+  <div>
+    <button @click="view='AnimeJS'">AnimeJS</button>
+    <button @click="view='Slide'">Slide</button>
+    <transition name="component-fade" mode="out-in">
+      <component :is="view"></component>
+    </transition>
+  </div>
 </template>
 
 <script>
+import AnimeJS from "./AnimeJS";
+import Slide from "./Slide";
+
+export default {
+  name: "MultiComponents",
+  data() {
+    return {
+      view: 'AnimeJS'
+    }
+  },
+  components: {
+    AnimeJS,
+    Slide
+  }
+}
 </script>
 
 <style lang="scss" scoped>
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+
+.component-fade-enter, .component-fade-leave-to {
+  opacity: 0;
+}
 </style>
 
 ```
@@ -964,41 +1009,118 @@ export default {
 
 ## Vue动画方式 5 - 列表动画
 
+::: tip
+
+- 除了渲染**单个节点**或者**同一时间渲染多个节点中的一个**，`Vue` 还能**同时渲染整个列表**
+
+:::
+
 ```vue
-<template>
 <div>
+  <button @click="add">Add</button>
+  <button @click="remove">Remove</button>
+  <transition-group name="list" tag="p">
+    <span v-for="item in items" :key="item">
+      {{ item }}
+    </span>
+  </transition-group>
 </div>
-</template>
-
-<script>
-</script>
-
-<style lang="scss" scoped>
-</style>
-
 ```
 
-- 利用`transition-group`可以对`v-for`渲染的每个元素应用过度
-- 范例：给列表添加增加过度
-  - `ul` 里的 `li` 套上`transition-group`  加上`name="fade"`
+- 利用`<transition-group></transition-group>`可以对`v-for`渲染的每个元素应用过渡效果
 
-```html
+::: tip
+
+- 由于循环渲染的多个元素需要放在一个标签中，但是如果直接在`<transition-group></transition-group>`中写一个包裹元素，则子元素不是循环渲染的元素
+- `vue`使用`tag attribute`，编译时将`<transition-group tag="xxx">`替换为设置的元素名`xxx`
+
+:::
+
+- 不同于 `<transition>`，用`<transition-group></transition-group>`会以一个**真实元素**呈现：
+  - 默认为一个 `<span>`
+  - 可以通过 `tag attribute` 更换为其他元素
+- 过渡模式`mode attribute`不可用，因为不再相互切换特有的单个元素
+- 内部元素必须提供唯一的 `key attribute` 值
+- CSS 过渡的类将会应用在内部的元素中，而不是这个**组/容器**本身
+
+> 示例
+
+<ClientOnly>
+  <code-drawer infoText="多组件动画" slotName="CSS_ListTransition" :resourceCode='`
+<template>
+  <div>
+    <button @click="add">Add</button>
+    <button @click="remove">Remove</button>
+    <transition-group name="list"
+                      tag="p">
+      <span v-for="item in items"
+            :key="item"
+            class="list-item">
+        {{ item }}
+      </span>
+    </transition-group>
+  </div>
+</template>
+<script>
+export default {
+  name: "ListTransition",
+  data() {
+    return {
+      items: [1, 2, 3, 4, 5],
+      nextNum: 6
+    }
+  },
+  methods: {
+    randomIndex() {
+      return Math.floor(Math.random() * this.items.length)
+    },
+    add() {
+      this.items.splice(this.randomIndex(), 0, this.nextNum++)
+    },
+    remove() {
+      this.items.splice(this.randomIndex(), 1)
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>`'>
+  <template v-slot:CSS_ListTransition>
+    <Vue-Animation-ListTransition></Vue-Animation-ListTransition>
+  </template>
+  </code-drawer>
+</ClientOnly>
+
+---
+
+```HTML
 <transition-group name="fade">
     <div v-for="c in courses" :key="c.name">
-        {{ c.name }} - ￥{{c.price}}
+        {{ c.name }} - ￥{{c.price}} 
     </div>
 </transition-group>
-```
-
-- css加动画效果
-
-```scss
+<style lang="scss" scoped>
 .fade-enter,.fade-leave-to{
     opacity: 0;
 }
 .fade-enter-active,.fade-leave-active{
     transition: opacity 1.5s;
 }
+</style>
+
 ```
 
 ---
