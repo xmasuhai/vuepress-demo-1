@@ -7,10 +7,16 @@
       {{buttonText}}
     </button>
     <transition :name="transitionName"
-                :enter-active-class="AnimeEnterClassName"
-                :leave-active-class="AnimeLeaveClassName"
+                v-if="animationMode"
     >
-      <p class="animateTarget" v-if="visible">{{ showText }}</p>
+      <p class="animateTarget" v-show="visible">{{ showText }}</p>
+    </transition>
+    <transition v-else
+                :name="transitionName"
+                :enter-active-class="animeEnterClassName"
+                :leave-active-class="animeLeaveClassName"
+    >
+      <p class="animateTarget" v-show="visible">{{ showText }}</p>
     </transition>
     <br>
   </div>
@@ -46,11 +52,18 @@ export default {
       type: String,
       default: 'Toggle',
     },
-    AnimeEnterClassName: {
-      type: String
+    animationMode: {
+      type: Boolean,
+      required: true,
+      default: true,
     },
-    AnimeLeaveClassName: {
-      type: String
+    animeEnterClassName: {
+      type: String,
+      default: '',
+    },
+    animeLeaveClassName: {
+      type: String,
+      default: '',
     }
   }
 }

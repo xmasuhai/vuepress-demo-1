@@ -4,6 +4,7 @@
                 transitionName="bounce"
                 buttonText="show animation"
                 :showText="showAnimation"
+                :animationMode="true"
     ></show-panel>
   </div>
 </template>

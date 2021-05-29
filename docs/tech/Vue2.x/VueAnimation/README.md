@@ -526,10 +526,14 @@ export default {
 
 :::
 
+---
+
 - CSS 动画样式在第三方库中已预设
 - 添加属性`enter-active-class` `leave-active-class`
   - `<transition enter-active-class="animated tada" leave-active-class="animated bounceOutRight">`
-- [官网](https://animate.style/#custom-builds)
+- [Animate Css官网](https://animate.style/#custom-builds)
+
+> 自定义过渡类名配合使用`animate.css`和使用`animation`属性和`@keyframes`关键帧动画不兼容
 
 ---
 

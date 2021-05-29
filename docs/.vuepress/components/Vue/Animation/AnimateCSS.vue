@@ -3,8 +3,9 @@
     <show-panel title="AnimateCSS"
                 buttonText="AnimateCSS"
                 showText="AnimateCSS TaDa"
-                AnimeEnterClassName="animated tada"
-                AnimeLeaveClassName="animated bounceOutRight"
+                animeEnterClassName="animated tada"
+                animeLeaveClassName="animated bounceOutRight"
+                :animationMode="false"
     ></show-panel>
   </div>
 </template>
@@ -12,7 +13,6 @@
 <script>
 import ShowPanel from './ShowPanel.vue'
 import 'animate.css'
-
 export default {
   name: "AnimateCSS",
   components: {
