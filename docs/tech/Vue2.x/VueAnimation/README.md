@@ -608,7 +608,11 @@ yarn add velocity-animate
   <div class="hello">
     <h3>AnimeJS</h3>
     <hr>
-    <button @click="go">Click Here to Animate</button>
+    <button :disabled="isDisabled"
+            @click="go"
+            :class="{ cursorBan: isBanned }"
+    >Click Here to Animate
+    </button>
     <h3 ref="square">hello</h3>
   </div>
 </template>
@@ -619,50 +623,40 @@ export default {
   data() {
     return {
       show: true,
+      isDisabled: false,
+      disableTime: 1000,
+      isBanned: false
     };
   },
   methods: {
     go() {
-      // console.log(anime);
       // bug fix: disable button when anime run
+      this.isDisabled = true
+      this.isBanned = true
       anime({
         targets: this.$refs.square,
-        translateX: 300,
+        translateX: 100,
         translateZ: 0,
         easing: "easeInOutQuad",
         direction: "alternate",
+        duration: this.disableTime
       });
-    },
-  },
+      setTimeout(() => {
+        this.isDisabled = false
+        this.isBanned = false
+      }, this.disableTime * 2)
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
 h3 {
   margin: 40px 0 0;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.cursorBan {
+  cursor: not-allowed;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-p {
-  font-size: 60px;
-  color: #42b983;
-}
-.block {
-  pointer-events: none;
-  position: relative;
-  width: 128px;
-  height: 128px;
-  margin: 1px;
-  background-color: currentColor;
-  font-size: 12px;
-  color: #2c3e50;
-}
-</style> `'>
+</style>`'>
 <template v-slot:AnimeJS>
 <Vue-Animation-AnimeJS></Vue-Animation-AnimeJS>
 </template>

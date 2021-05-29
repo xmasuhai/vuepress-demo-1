@@ -5,13 +5,15 @@
     <button :disabled="isDisabled"
             @click="go"
             :class="{ cursorBan: isBanned }"
-    >Click Here to Animate</button>
+    >Click Here to Animate
+    </button>
     <h3 ref="square">hello</h3>
   </div>
 </template>
 
 <script>
 import anime from "animejs";
+
 export default {
   name: "AnimeJS",
   data() {
@@ -35,12 +37,12 @@ export default {
         direction: "alternate",
         duration: this.disableTime
       });
-      setTimeout(()=>{
+      setTimeout(() => {
         this.isDisabled = false
         this.isBanned = false
-      }, this.disableTime*2)
-    },
-  },
+      }, this.disableTime * 2)
+    }
+  }
 };
 </script>
 
@@ -48,6 +50,7 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 .cursorBan {
   cursor: not-allowed;
 }
