@@ -52,4 +52,11 @@ export default {
   opacity: 0;
   transform: translateY(30px);
 }
+
+.list-move {
+  transition: all 1s;
+}
+.list-leave-active {
+  position: absolute;
+}
 </style>

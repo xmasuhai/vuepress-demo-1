@@ -1051,7 +1051,7 @@ export default {
   <div>
     <button @click="add">Add</button>
     <button @click="remove">Remove</button>
-    <transition-group name="list"
+    <transition-group name="listComplete"
                       tag="p">
       <span v-for="item in items"
             :key="item"
@@ -1084,18 +1084,24 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.list-item {
+.listComplete-item {
   display: inline-block;
   margin-right: 10px;
 }
-.list-enter-active,
-.list-leave-active {
+.listComplete-enter-active,
+.listComplete-leave-active {
   transition: all 1s;
 }
-.list-enter,
-.list-leave-to {
+.listComplete-enter,
+.listComplete-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+.listComplete-move {
+  transition: all 1s;
+}
+.listComplete-leave-active {
+  position: absolute;
 }
 </style>`'>
   <template v-slot:CSS_ListTransition>
