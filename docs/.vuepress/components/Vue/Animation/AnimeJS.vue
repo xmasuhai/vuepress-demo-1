@@ -2,7 +2,10 @@
   <div class="hello">
     <h3>AnimeJS</h3>
     <hr>
-    <button :disabled="isDisabled" @click="go">Click Here to Animate</button>
+    <button :disabled="isDisabled"
+            @click="go"
+            :class="{ cursorBan: isBanned }"
+    >Click Here to Animate</button>
     <h3 ref="square">hello</h3>
   </div>
 </template>
@@ -15,13 +18,15 @@ export default {
     return {
       show: true,
       isDisabled: false,
-      disableTime: 1000
+      disableTime: 1000,
+      isBanned: false
     };
   },
   methods: {
     go() {
       // bug fix: disable button when anime run
       this.isDisabled = true
+      this.isBanned = true
       anime({
         targets: this.$refs.square,
         translateX: 100,
@@ -32,6 +37,7 @@ export default {
       });
       setTimeout(()=>{
         this.isDisabled = false
+        this.isBanned = false
       }, this.disableTime*2)
     },
   },
@@ -41,5 +47,8 @@ export default {
 <style lang="scss" scoped>
 h3 {
   margin: 40px 0 0;
+}
+.cursorBan {
+  cursor: not-allowed;
 }
 </style>
