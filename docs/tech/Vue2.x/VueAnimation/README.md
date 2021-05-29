@@ -277,27 +277,29 @@ export default {
 
 ---
 
-## Vue动画方式2- CSS animation
+## Vue动画方式2- `CSS animation`
+
+### 使用`animation`属性和`@keyframes`关键帧动画
 
 > 使用方法
 
 - 同样使用`<transition name="xxx">` 标签，`name="xxx"`为类样式前缀
-- 区别于`CSS transition` 过渡属性
-  - 在`CSS animation` 动画属性 `v-enter` 类名在节点插入 DOM 后不会立即删除
-- 在`@keyframes`各个关键帧中设置变形、颜色、透明等属性
-  - 而是在 **`animationend` 事件 (MDN)** 触发时删除
+- 区别于`CSS transition` 过渡属性：
+  - 在`CSS animation` 动画属性 `v-enter` 类名在节点插入 `DOM` 后不会立即删除
+  - 而是在 **`animationend` 事件 (MDN)** 被触发时删除
   - [**`animationend` 事件 (MDN)**](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/animationend_event)
+- 在`@keyframes`各个关键帧中设置变形、颜色、透明等属性    
   - 需要设置过渡状态的类样式
-    - `.xxx-enter-active{animation: ...}`正在淡入
-    - `.xxx-leave-active{animation: ...}`正在淡出
-    - 在`@keyframes`中 设置关键帧（`to / from / 0% / 100%`）代替`enter / leave`
+  - `.xxx-enter-active{animation: ...}`：正在淡入
+  - `.xxx-leave-active{animation: ...}`：正在淡出
+  - 在`@keyframes`中 设置关键帧（`to / from / 0% / 100%`）代替`enter / leave`
   - `reverse`反向淡出动画，设置`.xxx-leave.active{animation: animationName 1s reverse}`
   - 保证最终状态即正常状态
 
 ---
 
 <ClientOnly>
-<code-drawer slotName="CSS_Animation" :resourceCode='`
+  <code-drawer slotName="CSS_Animation" :resourceCode='`
 <template>
   <div class="demoHeight">
     <show-panel title="CSS Animation"
@@ -351,10 +353,10 @@ export default {
   }
 }
 </style>`'>
-  <template v-slot:CSS_Animation>
-    <Vue-Animation-Animation></Vue-Animation-Animation>
-  </template>
-</code-drawer>
+    <template v-slot:CSS_Animation>
+      <Vue-Animation-Animation></Vue-Animation-Animation>
+    </template>
+  </code-drawer>
 </ClientOnly>
 
 ---
@@ -478,24 +480,20 @@ import 'animate.css'
 
 <ClientOnly>
   <code-drawer slotName="CSS_AnimateCSS" :resourceCode='`
-  <template>
-    <div>
-      <show-panel class="panel"
-                  title="Transition"
-                  transitionName="fade"
-                  showText="Hello">
-      </show-panel>
-    </div>
-  </template>`'>
+<template>
+  <div>
+    <show-panel class="panel"
+                title="Transition"
+                transitionName="fade"
+                showText="Hello">
+    </show-panel>
+  </div>
+</template>`'>
     <template v-slot:CSS_AnimateCSS>
       <Vue-Animation-AnimateCSS></Vue-Animation-AnimateCSS>
     </template>
   </code-drawer>
 </ClientOnly>
-
----
-
-- HAHA
 
 ---
 
@@ -948,7 +946,7 @@ export default {
 
 ### 多个组件的过渡
 
-- 不需要使用 key attribute，使用动态组件
+- 不需要使用 `key attribute`，使用动态组件
 
 ```vue
 <template>

@@ -2,7 +2,7 @@
   <div class="hello">
     <h3>AnimeJS</h3>
     <hr>
-    <button @click="go">Click Here to Animate</button>
+    <button :disabled="isDisabled" @click="go">Click Here to Animate</button>
     <h3 ref="square">hello</h3>
   </div>
 </template>
@@ -14,19 +14,25 @@ export default {
   data() {
     return {
       show: true,
+      isDisabled: false,
+      disableTime: 1000
     };
   },
   methods: {
     go() {
-      // console.log(anime);
       // bug fix: disable button when anime run
+      this.isDisabled = true
       anime({
         targets: this.$refs.square,
-        translateX: 300,
+        translateX: 100,
         translateZ: 0,
         easing: "easeInOutQuad",
         direction: "alternate",
+        duration: this.disableTime
       });
+      setTimeout(()=>{
+        this.isDisabled = false
+      }, this.disableTime*2)
     },
   },
 };
