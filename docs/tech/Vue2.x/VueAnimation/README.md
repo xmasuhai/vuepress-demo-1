@@ -1007,7 +1007,7 @@ export default {
 
 ---
 
-## Vue动画方式 5 - 列表动画
+## Vue动画方式 5 - 列表动画 `<transition-group>`
 
 ::: tip
 
@@ -1042,6 +1042,8 @@ export default {
 - 过渡模式`mode attribute`不可用，因为不再相互切换特有的单个元素
 - 内部元素必须提供唯一的 `key attribute` 值
 - CSS 过渡的类将会应用在内部的元素中，而不是这个**组/容器**本身
+
+### 列表的进入/离开过渡(`enter/leave`)
 
 > 示例
 
@@ -1109,6 +1111,63 @@ export default {
   </template>
   </code-drawer>
 </ClientOnly>
+
+---
+
+> 解决当 **添加和移除** 元素时 **平滑过渡** 的问题
+
+- 当添加和移除元素的时候，周围的元素会瞬间移动到他们的**新布局的位置**，而不是平滑的过渡
+- 设置`<transition-group name="xxx">`的`xxx-move {}`和`xxx-leave-active {}` 类的样式可以实现平滑过渡
+  - `xxx-move {transition: all 1s;}`
+  - `xxx-leave-active {position: absolute;}`
+  
+### 列表的移动过渡(`move`)
+
+- 使用 `v-move class`(其中的`v` 是用置`<transition-group name="xxx">`中的属性`name`代替)
+  - 不仅可以进入和离开动画，还可以改变定位，即为在元素的改变定位的过程中应用
+  - 设置 **过渡的切换时机** 和 **过渡曲线** 的例子
+- 可以通过 `name attribute` 来自定义前缀
+- 也可以通过 `move-class attribute` 手动设置
+
+> 示例
+
+- 安装`yarn add lodash`
+- 引入`import _ from 'lodash';`
+- 示例中为列表设置了排序时移动的过渡
+
+<ClientOnly>
+  <code-drawer infoText="多组件动画" slotName="CSS_ListFlipMoveClass" :resourceCode='``'>
+  <template v-slot:CSS_ListFlipMoveClass>
+    <Vue-Animation-ListFlipMoveClass></Vue-Animation-ListFlipMoveClass>
+  </template>
+  </code-drawer>
+</ClientOnly>
+
+---
+
+- 内部的实现：Vue 使用了一个叫 [FLIP](https://aerotwist.com/blog/flip-your-animations/) 简单的动画队列
+  使用 transforms 将元素从之前的位置平滑过渡新的位置
+- 注意使用 FLIP 过渡的元素不能设置为 `display: inline`
+- 作为替代方案，可以设置为 `display: inline-block` 或者放置于 `flex` 中
+
+> 综合示例
+
+```HTML
+<transition-group name="fade">
+</transition-group>
+<style lang="scss" scoped>
+</style>
+
+```
+
+
+### 列表`<transition-group>`的多维网格过渡
+### 列表`<transition-group>`的交错过渡
+
+---
+
+## `<transition>` 或 `<transition-group>`的可复用的过渡
+## `<transition>` 或 `<transition-group>`的动态过渡
 
 ---
 
