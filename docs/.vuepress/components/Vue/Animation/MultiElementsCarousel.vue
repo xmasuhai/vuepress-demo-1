@@ -20,6 +20,6 @@ export default {
 
 <style lang="scss" scoped>
 .threeElements::v-deep {
-  @import "../../../common/MultiElements.scss";
+  @import "../../../mixins/Animations";
 }
 </style>

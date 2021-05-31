@@ -1,0 +1,100 @@
+.pose {
+  position: relative;
+  padding: 20px;
+
+  & > button {
+    position: absolute;
+  }
+
+  .carousel-enter-active {
+    transition: all .3s ease;
+  }
+
+  .carousel-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+
+  .carousel-enter {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  .carousel-leave-to {
+    transform: translateX(-150px);
+    opacity: 0;
+  }
+}
+
+/*  fadeSwitch */
+.fadeSwitch-enter-active, {
+  transition: all .3s ease;
+}
+
+.fadeSwitch-leave-active, {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.fadeSwitch-enter, .fadeSwitch-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/*  flips */
+.flip-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.flip-list-leave-active {
+  position: absolute;
+}
+
+.flip-list-move {
+  transition: transform 1s;
+}
+
+.flip-list-enter-active,
+.flip-list-leave-active {
+  transition: all 1s;
+}
+
+.flip-list-enter,
+.flip-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/*  list */
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-move {
+  transition: all 1s;
+}
+
+.list-leave-active {
+  position: absolute;
+}
+
+/*  component-fade */
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+
+.component-fade-enter, .component-fade-leave-to {
+  opacity: 0;
+}

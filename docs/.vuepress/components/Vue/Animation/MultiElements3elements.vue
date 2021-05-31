@@ -21,6 +21,6 @@ export default {
 
 <style lang="scss" scoped>
 .twoElements::v-deep {
-  @import "../../../common/MultiElements.scss";
+  @import "../../../mixins/Animations";
 }
 </style>
