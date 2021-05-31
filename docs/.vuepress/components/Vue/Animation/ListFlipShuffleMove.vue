@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="shuffle">shuffle</button>
+    <button @click="shuffle">Shuffle Move</button>
     <transition-group name="flip-list"
                       tag="ul">
       <li v-for="item in items"
@@ -22,16 +22,20 @@
 
 <script>
 import _ from 'lodash'
-
+import randoms from '../../../mixins/random.js'
 export default {
-  name: 'ListFlipMoveClass',
+  name: 'ListFlipShuffleMove',
+  mixins: [randoms],
   data() {
     return {
       items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      nextNum: 9
     }
   },
   methods: {
     shuffle() {
+      this.randomIndex()
+      this.oddEven()
       this.items = _.shuffle(this.items)
     }
   }
