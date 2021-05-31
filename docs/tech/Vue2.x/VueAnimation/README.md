@@ -473,7 +473,7 @@ import 'animate.css'
 > 使用`animate.css`
 
 - 注意使用时`animate.css@3.6.1`与`animate.css@4.1.1`类前缀不同
-- 直接导入到入口文件`main.js/ts`中去：`import 'animate.css'`
+- 导入到入口文件`main.js/ts`中去：`import 'animate.css'`
 - 编译后会自动添加相应的`<style></style>`标签为全局样式
 
 > 例子 `animate.css`
@@ -1136,30 +1136,91 @@ export default {
 - 示例中为列表设置了排序时移动的过渡
 
 <ClientOnly>
-  <code-drawer infoText="多组件动画" slotName="CSS_ListFlipMoveClass" :resourceCode='``'>
-  <template v-slot:CSS_ListFlipMoveClass>
-    <Vue-Animation-ListFlipMoveClass></Vue-Animation-ListFlipMoveClass>
-  </template>
+  <code-drawer infoText="多组件动画" slotName="CSS_ListFlipMoveClass" :resourceCode='`
+<template>
+  <div>
+    <button @click="shuffle">shuffle</button>
+    <transition-group name="flip-list"
+                      tag="ul">
+      <li v-for="item in items"
+          :key="item"
+          class="flip-list-item">
+        {{ item }}
+      </li>
+    </transition-group>
+    <br>
+    <transition-group name="flip-list"
+                      tag="ul">
+      <li v-for="item in items"
+          :key="item">
+        {{ item }}
+      </li>
+    </transition-group>
+  </div>
+</template>
+<script>
+import _ from "lodash"
+export default {
+  name: "ListFlipMoveClass",
+  data() {
+    return {
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    }
+  },
+  methods: {
+    shuffle() {
+      this.items = _.shuffle(this.items)
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.flip-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.flip-list-leave-active {
+  position: absolute;
+}
+.flip-list-move {
+  transition: transform 1s;
+}
+.flip-list-enter-active,
+.flip-list-leave-active {
+  transition: all 1s;
+}
+.flip-list-enter,
+.flip-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>`'>
+    <template v-slot:CSS_ListFlipMoveClass>
+      <Vue-Animation-ListFlipMoveClass></Vue-Animation-ListFlipMoveClass>
+    </template>
   </code-drawer>
 </ClientOnly>
 
 ---
 
 - 内部的实现：Vue 使用了一个叫 [FLIP](https://aerotwist.com/blog/flip-your-animations/) 简单的动画队列
-  使用 transforms 将元素从之前的位置平滑过渡新的位置
+- 使用 transforms 将元素从之前的位置平滑过渡新的位置
 - 注意使用 FLIP 过渡的元素不能设置为 `display: inline`
 - 作为替代方案，可以设置为 `display: inline-block` 或者放置于 `flex` 中
 
-> 综合示例
+> 综合示例 使列表的一切变动都会有动画过渡
 
-```HTML
-<transition-group name="fade">
-</transition-group>
-<style lang="scss" scoped>
-</style>
+- 封装了`.../mixins/random.js`的逻辑
 
-```
+<ClientOnly>
+  <code-drawer infoText="多组件动画" slotName="CSS_ListFlipShuffleMove" :resourceCode='``'>
+<template v-slot:CSS_ListFlipShuffleMove>
+<Vue-Animation-ListFlipShuffleMove></Vue-Animation-ListFlipShuffleMove>
+</template>
+  </code-drawer>
+</ClientOnly>
 
+---
 
 ### 列表`<transition-group>`的多维网格过渡
 ### 列表`<transition-group>`的交错过渡

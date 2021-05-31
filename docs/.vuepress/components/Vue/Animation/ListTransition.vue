@@ -14,23 +14,14 @@
 </template>
 
 <script>
+import randoms from '../../../mixins/random.js'
 export default {
   name: 'ListTransition',
+  mixins: [randoms],
   data() {
     return {
       items: [1, 2, 3, 4, 5],
       nextNum: 6
-    }
-  },
-  methods: {
-    randomIndex() {
-      return Math.floor(Math.random() * this.items.length)
-    },
-    add() {
-      this.items.splice(this.randomIndex(), 0, this.nextNum++)
-    },
-    remove() {
-      this.items.splice(this.randomIndex(), 1)
     }
   }
 }
