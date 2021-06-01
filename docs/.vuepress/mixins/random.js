@@ -19,6 +19,7 @@ export default {
     },
     checkItemList() {
       if (this.itemList.length === 0) {
+        this.itemList.push(0)
         this.recover()
       }
     },
