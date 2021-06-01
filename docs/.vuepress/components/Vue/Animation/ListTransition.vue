@@ -4,7 +4,7 @@
     <button @click="remove">{{buttonText}}</button>
     <transition-group name="list"
                       tag="p">
-      <span v-for="item in items"
+      <span v-for="item in itemList"
             :key="item"
             class="list-item">
         {{ item }}
@@ -21,13 +21,14 @@ export default {
   mixins: [randoms],
   data() {
     return {
-      items: [1, 2, 3, 4, 5],
+      itemList: [1, 2, 3, 4, 5],
+      originItems: [],
       nextNum: 6,
     }
   },
   computed: {
     buttonText() {
-      return (this.items.length === 0) ?
+      return (this.itemList.length === 0) ?
         'recover' :
         'remove'
     }
