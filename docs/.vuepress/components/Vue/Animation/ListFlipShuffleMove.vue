@@ -23,6 +23,7 @@
 <script>
 import _ from 'lodash'
 import randoms from '../../../mixins/random.js'
+
 export default {
   name: 'ListFlipShuffleMove',
   mixins: [randoms],
