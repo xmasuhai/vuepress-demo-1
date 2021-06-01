@@ -3,7 +3,7 @@
     <button @click="shuffle">shuffle</button>
     <transition-group name="flip-list"
                       tag="ul">
-      <li v-for="item in items"
+      <li v-for="item in itemList"
           :key="item"
           class="flip-list-item">
         {{ item }}
@@ -12,7 +12,7 @@
     <br>
     <transition-group name="flip-list"
                       tag="ul">
-      <li v-for="item in items"
+      <li v-for="item in itemList"
           :key="item">
         {{ item }}
       </li>
@@ -27,12 +27,12 @@ export default {
   name: 'ListFlipMoveClass',
   data() {
     return {
-      items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      itemList: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     }
   },
   methods: {
     shuffle() {
-      this.items = _.shuffle(this.items)
+      this.itemList = _.shuffle(this.itemList)
     }
   }
 }
