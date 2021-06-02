@@ -1429,7 +1429,45 @@ export default {
 ---
 
 ## `<transition>` 或 `<transition-group>`的可复用的过渡
+
+> 过渡可以通过 Vue 的组件系统实现复用。要创建一个可复用过渡组件：
+
+- 直接将`<transition>` 或 `<transition-group>`作为根组件，加上方法或样式，进行统一封装
+- 使用插槽`<slot></slot>`，使用时将任何子组件放置在其中
+
+```vue
+<template>
+  <transition
+          name="very-special-transition"
+          mode="out-in"
+          v-on:before-enter="beforeEnter"
+          v-on:after-enter="afterEnter"
+  >
+    <slot></slot>
+  </transition>
+</template>
+<script>
+export default {
+  methods: {
+    beforeEnter: function (el) { // ... },
+    afterEnter: function (el) { // ... }
+  }
+}
+</script>
+
+```
+
 ## `<transition>` 或 `<transition-group>`的动态过渡
+
+- 过渡也是数据驱动
+- 动态过渡最基本的例子是通过 `name attribute` 来绑定动态值
+- 用 Vue 的过渡系统来定义的 CSS 过渡/动画在不同过渡间切换
+
+```vue
+<transition v-bind:name="transitionName">
+  <!-- ... -->
+</transition>
+```
 
 ---
 
