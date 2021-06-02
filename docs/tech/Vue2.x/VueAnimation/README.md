@@ -1344,13 +1344,82 @@ export default {
 
 ---
 
-### 列表`<transition-group>`的交错过渡
+### 列表`<transition-group>`的交错过渡 `Staggered`
 
 > 示例
 
 <ClientOnly>
   <code-drawer infoText="多维交错过渡" slotName="CSS_ListStagger" :resourceCode='`
-`'>
+<template>
+  <div ref="staggered">
+    <input v-model="query">
+    <transition-group name="staggered-fade"
+                      tag="ul"
+                      :css="false"
+                      @before-enter="beforeEnter"
+                      @enter="enter"
+                      @leave="leave">
+      <li v-for="(item, index) in computedList"
+          :key="item.msg"
+          :data-index="index">
+        {{ item.msg }}
+      </li>
+    </transition-group>
+  </div>
+</template>
+<script>
+import Anime from "animejs"
+export default {
+  name: "listStagger",
+  data() {
+    return {
+      query: "",
+      list: [
+        {msg: "Bruce Lee"},
+        {msg: "Jackie Chan"},
+        {msg: "Chuck Norris"},
+        {msg: "Jet Li"},
+        {msg: "Kung Fury"}
+      ],
+    }
+  },
+  computed: {
+    computedList: function () {
+      return this.list.filter((item) => {
+        return item.msg
+          .toLowerCase()
+          .indexOf(this.query.toLowerCase()) !== -1
+      })
+    }
+  },
+  methods: {
+    beforeEnter(el) {
+      el.style.opacity = 0
+      el.style.height = 0
+    },
+    enter(el, done) {
+      Anime({
+        targets: el,
+        opacity: 1,
+        height: "1.6em",
+        delay: el.dataset.index * .15,
+        easing: "linear",
+        complete: done()
+      })
+    },
+    leave(el, done) {
+      Anime({
+        targets: el,
+        opacity: 0,
+        height: 0,
+        delay: el.dataset.index * .15,
+        easing: "linear"
+        // complete: done()
+      })
+    }
+  }
+}
+</script>`'>
 <template v-slot:CSS_ListStagger>
   <Vue-Animation-ListStagger></Vue-Animation-ListStagger>
 </template>

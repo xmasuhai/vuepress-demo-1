@@ -35,47 +35,37 @@ export default {
   },
   computed: {
     computedList: function () {
-      const vm = this
       return this.list.filter((item) => {
         return item.msg
           .toLowerCase()
-          .indexOf(vm.query.toLowerCase()) !== -1
+          .indexOf(this.query.toLowerCase()) !== -1
       })
     }
   },
   methods: {
-    beforeEnter: function (el) {
-      console.log("this.$refs.staggered",this.$refs.staggered)
+    beforeEnter(el) {
       el.style.opacity = 0
       el.style.height = 0
     },
-    enter: function (el, done) {
-      let delay = el.dataset.index * 150
-      setTimeout(function () {
-        Anime({
-          targets: this.$refs.staggered,
-          translateX: 250,
-          complete: done()
-        })
-      }, delay)
+    enter(el, done) {
+      Anime({
+        targets: el,
+        opacity: 1,
+        height: '1.6em',
+        delay: el.dataset.index * .1,
+        easing: 'easeInCubic',
+        complete: done()
+      })
     },
-    leave: function (el, done) {
-      let delay = el.dataset.index * 150
-      setTimeout(function () {
-        Anime({
-          targets: this.$refs.staggered,
-          translateX: 250,
-          complete: done()
-        })
-      }, delay)
+    leave(el, done) {
+      Anime({
+        targets: el,
+        opacity: 0,
+        height: 0,
+        delay: el.dataset.index * .1,
+        easing: 'easeOutCubic',
+      })
     }
-  },
-  updated() {
-    console.log(this.query)
   }
 }
 </script>
-
-<style scoped>
-
-</style>
