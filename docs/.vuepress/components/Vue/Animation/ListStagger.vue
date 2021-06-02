@@ -1,15 +1,17 @@
 <template>
-  <div id="staggered-list-demo">
+  <div ref="staggered">
     <input v-model="query">
     <transition-group name="staggered-fade"
                       tag="ul"
-                      v-bind:css="false"
-                      v-on:before-enter="beforeEnter"
-                      v-on:enter="enter"
-                      v-on:leave="leave">
+                      :css="false"
+                      @before-enter="beforeEnter"
+                      @enter="enter"
+                      @leave="leave">
       <li v-for="(item, index) in computedList"
-          v-bind:key="item.msg"
-          v-bind:data-index="index">{{ item.msg }}</li>
+          :key="item.msg"
+          :data-index="index">
+        {{ item.msg }}
+      </li>
     </transition-group>
   </div>
 </template>
@@ -19,7 +21,6 @@ import Anime from 'animejs'
 
 export default {
   name: 'listStagger',
-  el: '#staggered-list-demo',
   data() {
     return {
       query: '',
@@ -29,19 +30,22 @@ export default {
         {msg: 'Chuck Norris'},
         {msg: 'Jet Li'},
         {msg: 'Kung Fury'}
-      ]
+      ],
     }
   },
   computed: {
     computedList: function () {
       const vm = this
-      return this.list.filter(function (item) {
-        return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+      return this.list.filter((item) => {
+        return item.msg
+          .toLowerCase()
+          .indexOf(vm.query.toLowerCase()) !== -1
       })
     }
   },
   methods: {
     beforeEnter: function (el) {
+      console.log("this.$refs.staggered",this.$refs.staggered)
       el.style.opacity = 0
       el.style.height = 0
     },
@@ -49,7 +53,7 @@ export default {
       let delay = el.dataset.index * 150
       setTimeout(function () {
         Anime({
-          targets: '#staggered-list-demo',
+          targets: this.$refs.staggered,
           translateX: 250,
           complete: done()
         })
@@ -59,12 +63,15 @@ export default {
       let delay = el.dataset.index * 150
       setTimeout(function () {
         Anime({
-          targets: '#staggered-list-demo',
+          targets: this.$refs.staggered,
           translateX: 250,
           complete: done()
         })
       }, delay)
     }
+  },
+  updated() {
+    console.log(this.query)
   }
 }
 </script>

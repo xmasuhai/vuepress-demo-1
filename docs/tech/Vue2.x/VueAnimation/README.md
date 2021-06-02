@@ -1346,6 +1346,17 @@ export default {
 
 ### 列表`<transition-group>`的交错过渡
 
+> 示例
+
+<ClientOnly>
+  <code-drawer infoText="多维交错过渡" slotName="CSS_ListStagger" :resourceCode='`
+`'>
+<template v-slot:CSS_ListStagger>
+  <Vue-Animation-ListStagger></Vue-Animation-ListStagger>
+</template>
+  </code-drawer>
+</ClientOnly>
+
 ---
 
 ## `<transition>` 或 `<transition-group>`的可复用的过渡
