@@ -55,7 +55,7 @@ export default {
         targets: el,
         opacity: {
           value: 1,
-          duration: this.fadeInDuration,
+          duration: 10000,
         },
         easing: 'easeInCubic',
         loop: true,
@@ -71,7 +71,7 @@ export default {
         targets: el,
         opacity: {
           value: 0,
-          duration: this.fadeOutDuration,
+          duration: 10000,
         },
         easing: 'easeOutCubic',
         loop: true,
