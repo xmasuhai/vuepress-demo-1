@@ -1,5 +1,5 @@
 <template>
-  <div ref="staggered">
+  <div>
     <input v-model="query">
     <transition-group name="staggered-fade"
                       tag="ul"
@@ -52,7 +52,7 @@ export default {
         targets: el,
         opacity: 1,
         height: '1.6em',
-        delay: el.dataset.index * .1,
+        delay: el.dataset.index * .03,
         easing: 'easeInCubic',
         complete: done()
       })

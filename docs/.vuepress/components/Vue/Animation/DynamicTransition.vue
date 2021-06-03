@@ -18,13 +18,15 @@
     <br>
     <button
       v-if="stop"
-      @click="stop = false; show = false"
-    >Start animating
+      @click="stop = false; show = false;"
+      class="success">
+      Start animating
     </button>
     <button
       v-else
-      @click="stop = true"
-    >Stop it!
+      @click="stop = true;"
+      class="danger">
+      Stop it!
     </button>
   </div>
 </template>
@@ -40,7 +42,7 @@ export default {
       fadeInDuration: 1000,
       fadeOutDuration: 1000,
       maxFadeDuration: 1500,
-      stop: true
+      stop: true,
     }
   },
   mounted: function () {
@@ -53,35 +55,45 @@ export default {
     enter(el, done) {
       Anime({
         targets: el,
-        opacity: {
-          value: 1,
-          duration: 10000,
-        },
+        opacity: 1,
         easing: 'easeInCubic',
+        duration: 3000,
         loop: true,
-        complete() {
-          done()
-          if (!this.stop) this.show = false
-        }
         }
       )
     },
-    leave: function (el, done) {
+    leave(el, done) {
       Anime({
         targets: el,
         opacity: {
-          value: 0,
-          duration: 10000,
+          value: [1, 0],
+          easing: 'easeOutCubic',
         },
-        easing: 'easeOutCubic',
+        duration: 3000,
         loop: true,
-        complete() {
-          done()
-          this.show = true
-        }
         }
       )
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+button {
+  outline: 0;
+  border: 0;
+  color: white;
+  border-radius: 5px;
+  height: 30px;
+}
+.success {
+  background-color: #28a745;
+}
+.danger {
+  background-color:  #ff4136;
+}
+
+.primary {
+  color: #0074d9;
+}
+</style>
