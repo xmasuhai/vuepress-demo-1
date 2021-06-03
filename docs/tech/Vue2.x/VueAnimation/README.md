@@ -157,7 +157,9 @@ p {
 - 使用一个没有名字的 `<transition>`，则 `v-` 是这些类名的默认前缀
   - 如果使用了 `<transition name="my-transition">`，那么 `v-enter` 会替换为 `my-transition-enter`
 
-![pic](https://cn.vuejs.org/images/transition.png)
+---
+
+<img alt="v3" src="https://v3.cn.vuejs.org/images/transitions.svg"/>
 
 ### CSS transition 过渡 另一个例子 Slide
 
@@ -1336,9 +1338,9 @@ export default {
   }
 }
 </style>`'>
-  <template v-slot:CSS_ListFlipGrid>
-    <Vue-Animation-ListFlipGrid></Vue-Animation-ListFlipGrid>
-  </template>
+    <template v-slot:CSS_ListFlipGrid>
+      <Vue-Animation-ListFlipGrid></Vue-Animation-ListFlipGrid>
+    </template>
   </code-drawer>
 </ClientOnly>
 
@@ -1384,7 +1386,7 @@ export default {
     }
   },
   computed: {
-    computedList: function () {
+    computedList() {
       return this.list.filter((item) => {
         return item.msg
           .toLowerCase()
@@ -1414,15 +1416,15 @@ export default {
         height: 0,
         delay: el.dataset.index * .15,
         easing: "linear"
-        // complete: done()
+        /* complete: done() 不可写 */
       })
     }
   }
 }
 </script>`'>
-<template v-slot:CSS_ListStagger>
-  <Vue-Animation-ListStagger></Vue-Animation-ListStagger>
-</template>
+    <template v-slot:CSS_ListStagger>
+      <Vue-Animation-ListStagger></Vue-Animation-ListStagger>
+    </template>
   </code-drawer>
 </ClientOnly>
 
@@ -1440,17 +1442,16 @@ export default {
   <transition
           name="very-special-transition"
           mode="out-in"
-          v-on:before-enter="beforeEnter"
-          v-on:after-enter="afterEnter"
-  >
+          @before-enter="beforeEnter"
+          @after-enter="afterEnter">
     <slot></slot>
   </transition>
 </template>
 <script>
 export default {
   methods: {
-    beforeEnter: function (el) { // ... },
-    afterEnter: function (el) { // ... }
+    beforeEnter(el) { // ... },
+    afterEnter(el) { // ... }
   }
 }
 </script>
@@ -1461,7 +1462,7 @@ export default {
 
 - 过渡也是数据驱动
 - 动态过渡最基本的例子是通过 `name attribute` 来绑定动态值
-- 用 Vue 的过渡系统来定义的 CSS 过渡/动画在不同过渡间切换
+- 用 Vue 的过渡系统来定义的 CSS 过渡/动画在 不同 **过渡间** 切换
 
 ```vue
 <transition v-bind:name="transitionName">
@@ -1469,7 +1470,23 @@ export default {
 </transition>
 ```
 
+- 所有过渡 `attribute` 都可以动态绑定，比如`move attribute`
+- 还可以通过事件钩子获取上下文中的所有数据，因为事件钩子都是方法
+- 根据组件的状态不同，JS 过渡 会有不同的表现
+
+> 示例
+
+<ClientOnly>
+  <code-drawer infoText="多维交错过渡" slotName="CSS_DynamicTransition" :resourceCode='``'>
+<template v-slot:CSS_DynamicTransition>
+<Vue-Animation-DynamicTransition></Vue-Animation-DynamicTransition>
+</template>
+  </code-drawer>
+</ClientOnly>
+
 ---
+
+- 创建动态过渡的最终方案是组件通过接受 props 来动态修改之前的过渡
 
 ```HTML
 <transition-group name="fade">
