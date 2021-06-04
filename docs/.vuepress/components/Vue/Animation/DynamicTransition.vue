@@ -12,19 +12,20 @@
       :css="false"
       @before-enter="beforeEnter"
       @enter="enter"
+      @after-enter="enter"
       @leave="leave">
       <p v-show="show">hello</p>
     </transition>
     <br>
     <button
       v-if="stop"
-      @click="stop = false; show = false;"
+      @click="stop = false; show = !show; isLoop = true"
       class="success">
       Start animating
     </button>
     <button
       v-else
-      @click="stop = true;"
+      @click="stop = true; isLoop = false"
       class="danger">
       Stop it!
     </button>
@@ -39,38 +40,57 @@ export default {
   data() {
     return {
       show: true,
+      toggleText: "",
+      isLoop: true,
       fadeInDuration: 1000,
       fadeOutDuration: 1000,
       maxFadeDuration: 1500,
       stop: true,
     }
   },
-  mounted: function () {
-    this.show = false
+  mounted() {
+    this.show = true
   },
   methods: {
     beforeEnter(el) {
-      el.style.opacity = 0
+      el.style.opacity = "0"
     },
     enter(el, done) {
+      console.log("this.fadeInDuration: ", this.fadeInDuration)
+      console.log(this.isLoop)
       Anime({
         targets: el,
         opacity: 1,
         easing: 'easeInCubic',
-        duration: 3000,
-        loop: true,
+        duration: this.fadeInDuration,
+        direction: "alternate",
+        loop: this.isLoop,
+        complete: (() => {
+          const vm = this
+          if (!vm.stop) vm.show = false
+          console.log("enterOK")
+          done()
+        })
         }
       )
     },
     leave(el, done) {
+      console.log("this.fadeOutDuration: ",this.fadeOutDuration)
+      console.log(this.isLoop)
+      console.log("el: ", el)
       Anime({
         targets: el,
-        opacity: {
-          value: [1, 0],
-          easing: 'easeOutCubic',
-        },
-        duration: 3000,
-        loop: true,
+        opacity: 0,
+        easing: 'easeOutCubic',
+        duration: this.fadeOutDuration,
+        direction: "alternate",
+        loop: this.isLoop,
+        complete: (()=>{
+          const vm = this
+          vm.show = true
+          console.log("leaveOK")
+          done()
+        })
         }
       )
     }
