@@ -1477,7 +1477,7 @@ export default {
 > 示例
 
 <ClientOnly>
-  <code-drawer infoText="多维交错过渡" slotName="CSS_DynamicTransition" :resourceCode='``'>
+  <code-drawer infoText="动态过渡" slotName="CSS_DynamicTransition" :resourceCode='``'>
 <template v-slot:CSS_DynamicTransition>
 <Vue-Animation-DynamicTransition></Vue-Animation-DynamicTransition>
 </template>
