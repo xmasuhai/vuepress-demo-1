@@ -19,13 +19,13 @@
     <br>
     <button
       v-if="stop"
-      @click="stop = false; show = !show; isLoop = true"
+      @click="stop = false; show = false;"
       class="success">
       Start animating
     </button>
     <button
       v-else
-      @click="stop = true; isLoop = false"
+      @click="stop = true;"
       class="danger">
       Stop it!
     </button>
@@ -63,7 +63,6 @@ export default {
         easing: 'easeInCubic',
         duration: this.fadeInDuration,
         complete: (() => {
-          const vm = this
           if (!vm.stop) vm.show = false
           console.log('enterCompleteOK')
           done()
@@ -72,6 +71,8 @@ export default {
       animeEnter.finished.then(function () {
         if (!vm.stop) vm.show = false
         console.log('enterFinishOK')
+        console.log("this.show true?", vm.show)
+        console.log("--------------------")
         done()
       }).then(null, (reason) => {
         console.error(reason)
@@ -80,14 +81,12 @@ export default {
     leave(el, done) {
       const vm = this
       console.log('this.fadeOutDuration: ', this.fadeOutDuration)
-      console.log(this.isLoop)
       const animeLeave = anime({
         targets: el,
         opacity: 0,
         easing: 'easeOutCubic',
         duration: this.fadeOutDuration,
         complete: (() => {
-          const vm = this
           vm.show = true
           console.log('leaveCompleteOK')
           done()
@@ -96,6 +95,8 @@ export default {
       animeLeave.finished.then(function () {
         vm.show = true
         console.log('leaveFinishOK')
+        console.log("this.show true?", vm.show)
+        console.log("--------------------")
       }).then(null, (reason) => {
         console.error(reason)
       })
