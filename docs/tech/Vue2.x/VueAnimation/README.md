@@ -8,12 +8,12 @@ next: /tech/Vue2.x/VuePress/
 
 ## 大纲
 
-- Vue动画方式1 - `CSS transition`
-- Vue动画方式2 - `CSS animation`
-- Vue动画方式3 - JS 操作动画
-- Vue动画方式4 - 多元素动画
-- Vue动画方式5 - 列表动画
-- Vue动画方式6 - 组件过渡动效
+- Vue动画方式 1 - `CSS transition`
+- Vue动画方式 2 - `CSS animation`
+- Vue动画方式 3 - JS 操作动画
+- Vue动画方式 4 - 多元素动画
+- Vue动画方式 5 - 列表动画
+- Vue动画方式 6 - 组件过渡动效
 - 总结之前的几种动画库
 - 项目运用
 
@@ -25,11 +25,11 @@ next: /tech/Vue2.x/VuePress/
   - 在 CSS **过渡**和**动画**中自动应用 `class`
   - 可以配合使用第三方 **CSS 动画库**，如 `Animate.css`
   - 在**过渡钩子函数**中使用 `JavaScript` 直接操作 DOM
-  - 可以配合使用**第三方 `JavaScript` 动画库**，如 `Velocity.js`
+  - 可以配合使用**第三方 `JavaScript` 动画库**，如 `Velocity.js(dead)` `anime.js` `GSAP(Vue3.0推荐)`
 
 ---
 
-## Vue动画方式1 - `CSS transition`
+## Vue动画方式 1 - `CSS transition`
 
 - Vue 提供封装的`<transition name="xxx"></transition>`标签，在标签内写需要设置动画的节点
 - 给任何元素/组件 添加 **进入/离开** 过渡效果
@@ -37,12 +37,12 @@ next: /tech/Vue2.x/VuePress/
   - 条件展示`v-show`
   - 动态组件`v-bind:is=""`
   - 组件根节点
-- `name="xxx"` 可设置类样式的前缀
+- 必须设置相关类样式的前缀`name="xxx"`，必须包括如下样式：
   - `xxx-enter-active`
   - `xxx-leave-active`
   - `xxx-enter`
   - `xxx-leave-to`
-- 注意样式隔离（例如设置`name="fade"`）
+- 注意 **进入/离开** 过渡样式相同时，可以并列（例如设置`name="fade"`）
   - `.fade-enter-active, .fade-leave-active {}`
   - `.fade-enter, .fade-leave-to {}`
 - 一些 UI 组件库的CSS全局样式会污染默认样式
@@ -52,15 +52,37 @@ next: /tech/Vue2.x/VuePress/
 <ClientOnly>
   <code-drawer slotName="CSS_transition" :resourceCode='`
 <template>
-  <div>
-    <show-panel class="panel"
-                title="Transition"
-                transitionName="fade"
-                showText="Hello">
-    </show-panel>
-  </div>
+<div>
+  <button v-on:click="visible = !visible">
+    Toggle
+  </button>
+  <transition name="fade">
+    <p v-if="visible">hello</p>
+  </transition>
+</div>
 </template>
-`'>
+<script>
+export default {
+  data() {
+    return {
+      visible: true
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: all 2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+  width: 100px;
+}
+p {
+  border: 1px solid red;
+  width: 300px;
+}
+</style>`'>
     <template v-slot:CSS_transition>
       <Vue-Animation-Transition></Vue-Animation-Transition>
     </template>
@@ -79,7 +101,6 @@ next: /tech/Vue2.x/VuePress/
     <button @click="visible = !visible">
       Toggle
     </button>
-
     <transition :name="transitionName">
       <p v-if="visible">{{ showText }}</p>
     </transition>
@@ -104,12 +125,6 @@ export default {
 .fixHeight100 {
   height: 100px;
 }
-.bounce-enter-active {
-  animation: bounce-in .5s;
-}
-.bounce-leave-active {
-  animation: bounce-in .5s reverse;
-}
 
 .fade-enter-active,
 .fade-leave-active {
@@ -133,6 +148,8 @@ p {
 
 ---
 
+> 分析 1
+
 - 用`<transition></transition>`包裹需要加动画的节点
 - 设置属性`name`: `<transition name="fade">`
 - 设置**初始样式**，比如
@@ -143,8 +160,9 @@ p {
   - `.fade-enter, .fade-leave-to {...}`
 - 设置 **切换条件** `v-if` / `v-show`
 
-> 过渡过程`name`属性值替代`v`
+> 分析 2
 
+- 过渡过程`name`属性值替代`v`
 - 淡入的第一帧 `.v-enter` 元素插入前生效的样式，插入后下一帧删除
 - 进入过度生效时状态 `.v-enter-active` 过渡/动画中 `.v-active {transition: all 2s;}` 此时使用`transition`过渡
 - 进入过度结束状态`.v-enter-to` 淡入最后一帧 添加样式
@@ -161,9 +179,9 @@ p {
 
 <img alt="v3" src="https://v3.cn.vuejs.org/images/transitions.svg"/>
 
-### CSS transition 过渡 另一个例子 Slide
-
 ---
+
+> CSS transition 过渡 另一个例子 Slide
 
 <ClientOnly>
 <code-drawer slotName="CSS_Slide" :resourceCode='`
@@ -176,6 +194,7 @@ p {
   </div>
 </template>
 <script>
+// 封装通用组件ShowPanel
 import ShowPanel from "./ShowPanel.vue"
 export default {
   name: "Slide",
@@ -211,6 +230,81 @@ export default {
 </template>
 </code-drawer>
 </ClientOnly>
+
+> 封装通用组件ShowPanel
+
+```vue
+<template>
+  <div>
+    <br>
+    <h2>{{ title }}</h2>
+    <br>
+    <button @click="toggle">
+      {{buttonText}}
+    </button>
+    <transition :name="transitionName"
+                v-if="animationMode"
+    >
+      <p class="animateTarget" v-show="visible">{{ showText }}</p>
+    </transition>
+    <transition v-else
+                :name="transitionName"
+                :enter-active-class="animeEnterClassName"
+                :leave-active-class="animeLeaveClassName"
+    >
+      <p class="animateTarget" v-show="visible">{{ showText }}</p>
+    </transition>
+    <br>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      visible: true
+    }
+  },
+  methods: {
+    toggle() {
+      this.visible = !this.visible
+    }
+  },
+  props: {
+    title: {
+      type: String,
+      required: true,
+      default: '',
+    },
+    transitionName: {
+      type: String,
+    },
+    showText: {
+      type: String,
+      required: true,
+      default: 'Hello',
+    },
+    buttonText: {
+      type: String,
+      default: 'Toggle',
+    },
+    animationMode: {
+      type: Boolean,
+      default: true,
+    },
+    animeEnterClassName: {
+      type: String,
+      default: '',
+    },
+    animeLeaveClassName: {
+      type: String,
+      default: '',
+    }
+  }
+}
+</script>
+
+```
 
 ---
 
@@ -591,9 +685,9 @@ yarn add velocity-animate
 
 > 参考文章
 
-- 推荐使用自定义指令实现的`animejs`二次封装库[vue-anime](https://github.com/BenAHammond/vue-anime)
+- 推荐使用自定义指令实现的`anime.js`二次封装库[vue-anime](https://github.com/BenAHammond/vue-anime)
   - [Vuenime demo](https://denisinvader.github.io/vuenime/?path=/story/objects--with-colors/)
-- 支持时间线控制，分组动画的`animejs`二次封装库[vue-anime](https://github.com/liuhann/vue-anime)
+- 支持时间线控制，分组动画的`anime.js`二次封装库[vue-anime](https://github.com/liuhann/vue-anime)
 - [Anime+Vue<粒子按键效果>](https://www.jianshu.com/p/ff3887420935/)
 - [Anime+Vue<小人奔跑效果>](https://www.jianshu.com/p/92078f5247a4/)
 
@@ -602,7 +696,7 @@ yarn add velocity-animate
 - [webpack - 如何在Vue-Cli项目中使用anime.js(或任何外部库)？](https://www.coder.work/article/1328687)
 - [如何将anime.js导入我的Vue项目？](https://www.thinbug.com/q/49258336)
 
-> 用例 安装 `"animejs": "^3.2.1"`(如果装TS 还需`"@types/animejs": "^3.1.3"`)
+> 用例 安装 `"anime.js": "^3.2.1"`(如果装TS 还需`"@types/animejs": "^3.1.3"`)
 
 <ClientOnly>
   <code-drawer slotName="AnimeJS" :resourceCode='`
