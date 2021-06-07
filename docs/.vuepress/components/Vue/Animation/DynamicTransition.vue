@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       show: true,
-      toggleText: "",
+      toggleText: '',
       fadeInDuration: 1000,
       fadeOutDuration: 1000,
       maxFadeDuration: 1500,
@@ -52,40 +52,55 @@ export default {
   },
   methods: {
     beforeEnter(el) {
-      el.style.opacity = "0"
+      el.style.opacity = '0'
     },
     enter(el, done) {
       const vm = this
-      console.log("this.fadeInDuration: ", this.fadeInDuration)
-      console.log(this.isLoop)
+      console.log('this.fadeInDuration: ', this.fadeInDuration)
       const animeEnter = anime({
-        targets: this.$refs.dynamicText,
+        targets: el,
         opacity: 1,
         easing: 'easeInCubic',
         duration: this.fadeInDuration,
-        direction: "alternate",
+        complete: (() => {
+          if (!vm.stop) vm.show = false
+          console.log('enterCompleteOK')
+        })
       })
-      animeEnter.finished.then(function() {
+      animeEnter.finished.then(function () {
         if (!vm.stop) vm.show = false
-        console.log("enterOK")
-        done()
-      });
+        console.log('enterFinishOK')
+        console.log('this.show true?', vm.show)
+        console.log('--------------------')
+        // console.log("enter got done")
+        // done() // 不可加　vm.show = true; stop = true 停止动画时无回调函数 done()
+      }).then(null, (reason) => {
+        console.error(reason)
+      })
     },
     leave(el, done) {
       const vm = this
-      console.log("this.fadeOutDuration: ",this.fadeOutDuration)
-      console.log(this.isLoop)
+      console.log('this.fadeOutDuration: ', this.fadeOutDuration)
       const animeLeave = anime({
-        targets: this.$refs.dynamicText,
+        targets: el,
         opacity: 0,
         easing: 'easeOutCubic',
         duration: this.fadeOutDuration,
-        direction: "alternate",
+        complete: (() => {
+          vm.show = true
+          console.log('leaveCompleteOK')
+        })
       })
-      animeLeave.finished.then(function() {
+      animeLeave.finished.then(function () {
         vm.show = true
-        console.log("leaveOK")
-      });
+        console.log('leaveFinishOK')
+        console.log('this.show true?', vm.show)
+        console.log('--------------------')
+        console.log('leave got done')
+        done()
+      }).then(null, (reason) => {
+        console.error(reason)
+      })
     }
   }
 }
@@ -99,11 +114,13 @@ button {
   border-radius: 5px;
   height: 30px;
 }
+
 .success {
   background-color: #28a745;
 }
+
 .danger {
-  background-color:  #ff4136;
+  background-color: #ff4136;
 }
 
 .primary {
