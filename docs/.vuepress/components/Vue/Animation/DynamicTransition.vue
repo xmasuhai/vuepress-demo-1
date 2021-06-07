@@ -70,10 +70,10 @@ export default {
       animeEnter.finished.then(function () {
         if (!vm.stop) vm.show = false
         console.log('enterFinishOK')
-        console.log("this.show true?", vm.show)
-        console.log("--------------------")
+        console.log('this.show true?', vm.show)
+        console.log('--------------------')
         // console.log("enter got done")
-        // done()
+        // done() // 不可加　vm.show = true; stop = true 停止动画时无回调函数 done()
       }).then(null, (reason) => {
         console.error(reason)
       })
@@ -94,9 +94,9 @@ export default {
       animeLeave.finished.then(function () {
         vm.show = true
         console.log('leaveFinishOK')
-        console.log("this.show true?", vm.show)
-        console.log("--------------------")
-        console.log("leave got done")
+        console.log('this.show true?', vm.show)
+        console.log('--------------------')
+        console.log('leave got done')
         done()
       }).then(null, (reason) => {
         console.error(reason)
