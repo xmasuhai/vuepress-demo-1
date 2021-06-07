@@ -65,7 +65,6 @@ export default {
         complete: (() => {
           if (!vm.stop) vm.show = false
           console.log('enterCompleteOK')
-          done()
         })
       })
       animeEnter.finished.then(function () {
@@ -73,7 +72,8 @@ export default {
         console.log('enterFinishOK')
         console.log("this.show true?", vm.show)
         console.log("--------------------")
-        done()
+        // console.log("enter got done")
+        // done()
       }).then(null, (reason) => {
         console.error(reason)
       })
@@ -89,7 +89,6 @@ export default {
         complete: (() => {
           vm.show = true
           console.log('leaveCompleteOK')
-          done()
         })
       })
       animeLeave.finished.then(function () {
@@ -97,6 +96,8 @@ export default {
         console.log('leaveFinishOK')
         console.log("this.show true?", vm.show)
         console.log("--------------------")
+        console.log("leave got done")
+        done()
       }).then(null, (reason) => {
         console.error(reason)
       })
