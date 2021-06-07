@@ -14,7 +14,7 @@
       @enter="enter"
       @after-enter="enter"
       @leave="leave">
-      <p v-show="show">hello</p>
+      <p ref="dynamicText" v-show="show">hello</p>
     </transition>
     <br>
     <button
@@ -33,15 +33,14 @@
 </template>
 
 <script>
-import Anime from 'animejs'
+import anime from 'animejs'
 
 export default {
   name: 'DynamicTransition',
   data() {
     return {
       show: true,
-      toggleText: "",
-      isLoop: true,
+      toggleText: '',
       fadeInDuration: 1000,
       fadeOutDuration: 1000,
       maxFadeDuration: 1500,
@@ -53,46 +52,53 @@ export default {
   },
   methods: {
     beforeEnter(el) {
-      el.style.opacity = "0"
+      el.style.opacity = '0'
     },
     enter(el, done) {
-      console.log("this.fadeInDuration: ", this.fadeInDuration)
-      console.log(this.isLoop)
-      Anime({
+      const vm = this
+      console.log('this.fadeInDuration: ', this.fadeInDuration)
+      const animeEnter = anime({
         targets: el,
         opacity: 1,
         easing: 'easeInCubic',
         duration: this.fadeInDuration,
-        direction: "alternate",
-        loop: this.isLoop,
         complete: (() => {
           const vm = this
           if (!vm.stop) vm.show = false
-          console.log("enterOK")
+          console.log('enterCompleteOK')
           done()
         })
-        }
-      )
+      })
+      animeEnter.finished.then(function () {
+        if (!vm.stop) vm.show = false
+        console.log('enterFinishOK')
+        done()
+      }).then(null, (reason) => {
+        console.error(reason)
+      })
     },
     leave(el, done) {
-      console.log("this.fadeOutDuration: ",this.fadeOutDuration)
+      const vm = this
+      console.log('this.fadeOutDuration: ', this.fadeOutDuration)
       console.log(this.isLoop)
-      console.log("el: ", el)
-      Anime({
+      const animeLeave = anime({
         targets: el,
         opacity: 0,
         easing: 'easeOutCubic',
         duration: this.fadeOutDuration,
-        direction: "alternate",
-        loop: this.isLoop,
-        complete: (()=>{
+        complete: (() => {
           const vm = this
           vm.show = true
-          console.log("leaveOK")
+          console.log('leaveCompleteOK')
           done()
         })
-        }
-      )
+      })
+      animeLeave.finished.then(function () {
+        vm.show = true
+        console.log('leaveFinishOK')
+      }).then(null, (reason) => {
+        console.error(reason)
+      })
     }
   }
 }
@@ -106,11 +112,13 @@ button {
   border-radius: 5px;
   height: 30px;
 }
+
 .success {
   background-color: #28a745;
 }
+
 .danger {
-  background-color:  #ff4136;
+  background-color: #ff4136;
 }
 
 .primary {
