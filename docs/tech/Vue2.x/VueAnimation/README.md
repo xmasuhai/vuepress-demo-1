@@ -153,7 +153,7 @@ p {
 - 用`<transition></transition>`包裹需要加动画的节点
 - 设置属性`name`: `<transition name="fade">`
 - 设置**初始样式**，比如
-  - `width` 必须有初始值
+  - 无自身初始值的属性，比如`width` 必须有初始值
   - `opacity` 无需设置初始值，初始即为`1`
 - 设置**过度样式**
   - `.fade-enter-active, .fade-leave-active {transition: all 2s;}`
@@ -163,17 +163,17 @@ p {
 > 分析 2
 
 - 过渡过程`name`属性值替代`v`
-- 淡入的第一帧 `.v-enter` 元素插入前生效的样式，插入后下一帧删除
-- 进入过度生效时状态 `.v-enter-active` 过渡/动画中 `.v-active {transition: all 2s;}` 此时使用`transition`过渡
-- 进入过度结束状态`.v-enter-to` 淡入最后一帧 添加样式
-- 一般不需要`.v-enter-to`或`.v-leave`，结束状态即初始状态
-- 完成过渡，删除所有过渡`v`的样式，只保留元素自身的样式
-- `v-leave` -> `v-leave-active` -> `v-leave-to` 离开过渡
-- `.v-enter-active` `v-leave-active` 在过渡/动画完成之后移除
-  - 这个类可以被用来定义离开过渡的过程时间，延迟和曲线函数
-- `v-enter-to` `v-leave-to` 在过渡/动画完成之后移除
-- 使用一个没有名字的 `<transition>`，则 `v-` 是这些类名的默认前缀
+  - 使用一个没有名字的 `<transition>`，则 `v-` 是这些类名的默认前缀
   - 如果使用了 `<transition name="my-transition">`，那么 `v-enter` 会替换为 `my-transition-enter`
+- 淡入的第一帧 `.v-enter` 元素插入前生效的样式，插入后下一帧删除
+- 进入过度生效时状态 `.v-enter-active` **过渡/动画**中 `.v-active {transition: all 2s;}` 此时使用`transition`过渡
+- 进入过度结束状态`.v-enter-to` 淡入最后一帧 可添加样式
+- 一般不需要`.v-enter-to`或`.v-leave`，结束状态即初始状态
+- 完成过渡，删除所有过渡`v`的样式，只保留元素自身原来的样式
+- `v-leave` -> `v-leave-active` -> `v-leave-to` 离开过渡
+- `.v-enter-active` `v-leave-active` 在 **过渡/动画** 完成之后移除
+  - 这个类可以被用来定义离开过渡的过程时间 `duration`，延迟 `delay`和曲线函数`easing-function`等
+- `v-enter-to` `v-leave-to` 在 **过渡/动画 **完成之后移除
 
 ---
 
@@ -357,15 +357,22 @@ export default {
 
 :::
 
+---
+
 > 小结
 
-- `<transition name="xxx">` 标签
+- 使用`<transition name="xxx"></transition>` 标签，元素作为单个元素/组件的过渡效果
+- `<transition>` 只会把过渡效果应用到其包裹的内容上
+  - 而不会额外渲染 DOM 元素
+  - 也不会出现在可被检查的组件层级中
+- [`vue transition API`](https://cn.vuejs.org/v2/api/#transition)
 - 切换条件`v-if` / `v-show`
-- 样式
+- 添加过渡样式
   - 元素自身样式
   - 添加初始样式（`in / out`）
   - 添加过渡属性
     - `transition: transition-property，transition-duration，transition-timing-function transition-delay ;`
+- * [多元素切换（单次显示单个元素）动画过渡模式`mode attribute`](http://xmasuhai.xyz/vuepress-demo-1-website/tech/Vue2.x/VueAnimation/#vue%E5%8A%A8%E7%94%BB%E6%96%B9%E5%BC%8F4-%E5%A4%9A%E5%85%83%E7%B4%A0%E5%8A%A8%E7%94%BB)
 
 ---
 
@@ -382,17 +389,20 @@ export default {
 - 同样使用`<transition name="xxx">` 标签，`name="xxx"`为类样式前缀
 - 区别于`CSS transition` 过渡属性：
   - 在`CSS animation` 动画属性 `v-enter` 类名在节点插入 `DOM` 后不会立即删除
-  - 而是在 **`animationend` 事件 (MDN)** 被触发时删除
+  - 默认情况下，Vue 会等待过渡所在根元素的第一个 transitionend 或 animationend 事件
+  -  `v-enter` 类在 **`animationend` 事件 (MDN)** 被触发时删除
   - [**`animationend` 事件 (MDN)**](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/animationend_event)
-- 在`@keyframes`各个关键帧中设置变形、颜色、透明等属性    
+- 在`@keyframes`各个关键帧中设置 **变形、颜色、透明等属性**
   - 需要设置过渡状态的类样式
   - `.xxx-enter-active{animation: ...}`：正在淡入
   - `.xxx-leave-active{animation: ...}`：正在淡出
   - 在`@keyframes`中 设置关键帧（`to / from / 0% / 100%`）代替`enter / leave`
-  - `reverse`反向淡出动画，设置`.xxx-leave.active{animation: animationName 1s reverse}`
+  - `reverse` 反向淡出动画，设置`.xxx-leave.active{animation: animationName 1s reverse}`
   - 保证最终状态即正常状态
 
 ---
+
+> `animation`属性和`@keyframes`关键帧动画示例
 
 <ClientOnly>
   <code-drawer slotName="CSS_Animation" :resourceCode='`
@@ -514,6 +524,8 @@ export default {
 
 :::
 
+---
+
 ### 自定义过渡类名
 
 > 在以下的`<trasition>`标签属性中可添加自定义过渡类名
@@ -558,12 +570,14 @@ export default {
 
 ```sh
 yarn add animate.css@3.6.1
+# yarn add animate.css@4.1.1
 ```
 
 > 在入口文件`main.ts`中导入
 
 ```js
 import 'animate.css'
+...
 ```
 
 > 使用`animate.css`
@@ -572,7 +586,7 @@ import 'animate.css'
 - 导入到入口文件`main.js/ts`中去：`import 'animate.css'`
 - 编译后会自动添加相应的`<style></style>`标签为全局样式
 
-> 例子 `animate.css`
+> `animate.css`示例
 
 <ClientOnly>
   <code-drawer slotName="CSS_AnimateCSS" :resourceCode='`
@@ -633,7 +647,7 @@ export default {
 
 ---
 
-## Vue动画方式3 - JS 操作动画
+## Vue动画方式 3 - JS 操作动画
 
 - 在 `attribute` （横线连接 (`kebab-case`)） 中声明 JavaScript 钩子（驼峰式连接）
 - 在`methods`中写对应的方法
@@ -644,12 +658,10 @@ export default {
   @enter="enter"
   @after-enter="afterEnter"
   @enter-cancelled="enterCancelled"
-
   @before-leave="beforeLeave"
   @leave="leave"
   @after-leave="afterLeave"
-  @leave-cancelled="leaveCancelled"
->
+  @leave-cancelled="leaveCancelled">
   <!-- ... -->
 </transition>
 ```
@@ -676,12 +688,21 @@ yarn add velocity-animate
 
 ---
 
-### 配合动画库`animejs@3.2.1`
+### `Vue`配合动画库`anime.js` 版本`animejs@3.2.1`
+
+> 安装
+
+```sh
+yarn add animejs@3.2.1 --save
+```
+
+- 安装 `"animejs": "^3.2.1"`(如果装TS 还需安装对应类型`"@types/animejs": "^3.1.3"`)
+
+> 官方链接
 
 - [中文文档](https://www.animejs.cn/documentation/)
   - [Anime.js Demo](https://www.animejs.cn/demo/)
   - [文档 Demo](https://www.animejs.cn/documentation/)
-- 安装 `"animejs": "^3.2.1"`(如果装TS 还需`"@types/animejs": "^3.1.3"`)
 
 > 参考文章
 
@@ -696,7 +717,7 @@ yarn add velocity-animate
 - [webpack - 如何在Vue-Cli项目中使用anime.js(或任何外部库)？](https://www.coder.work/article/1328687)
 - [如何将anime.js导入我的Vue项目？](https://www.thinbug.com/q/49258336)
 
-> 用例 安装 `"anime.js": "^3.2.1"`(如果装TS 还需`"@types/animejs": "^3.1.3"`)
+> 示例
 
 <ClientOnly>
   <code-drawer slotName="AnimeJS" :resourceCode='`
@@ -761,11 +782,11 @@ h3 {
 
 ---
 
-### 配合动画库`GSAP`
+### 配合动画库`GSAP`(`Vue3.x`推荐)
 
 ---
 
-## Vue动画方式4 - 多元素动画
+## Vue动画方式 4 - 多元素动画
 
 > 示例
 
@@ -808,12 +829,14 @@ h3 {
   - 对于**相同**标签名的元素切换
     - 必须通过 `key attribute` 设置唯一的值来标记以让 `Vue` 区分
     - 多个相同结构与属性的元素进行合并，使用动态绑定`:key`区分，代替`v-if/v-else`
-- 如果使用 **过渡模式** `mode="in-out"`，需要将元素设置为**绝对定位**
+- 如果使用 **过渡模式** `mode="in-out"`，需要将元素设置为**绝对定位** `position: absolute;`
 - 轮播效果无需设置过渡模式
 
 ---
 
 ### 元素切换实例
+
+> 切换两个元素
 
 <ClientOnly>
   <code-drawer infoText="多元素动画" slotName="CSS_MultiElements2elements" :resourceCode='`
@@ -864,6 +887,8 @@ export default {
 </ClientOnly>
 
 ---
+
+> 切换三个元素
 
 <ClientOnly>
   <code-drawer infoText="多元素动画" slotName="CSS_MultiElements3elements" :resourceCode='`
@@ -950,6 +975,8 @@ export default {
 
 ---
 
+> 切换三个元素 `mode: in-out`
+
 <ClientOnly>
   <code-drawer infoText="多元素动画" slotName="CSS_MultiElementsModeInOut" :resourceCode='`
 <template>
@@ -966,10 +993,16 @@ export default {
   </div>
 </template>
 <script>
-// 同上例 略
+// 切换三个元素的JS逻辑抽成mixins 引入组件 MultiElements.js
+import multiElements from "/docs/.vuepress/mixins/MultiElements.js";
+export default {
+name: "MultiElementsModeInOut",
+mixins: [multiElements]
+}
 </script>
 <style lang="scss" scoped>
-/* 同上例 略 */
+/* 切换三个元素的样式 抽成mixins 引入组件 MultiElements.scss */
+@import "/docs/.vuepress/mixins/MultiElements.scss";
 </style>`'>
 <template v-slot:CSS_MultiElementsModeInOut>
 <Vue-Animation-MultiElementsModeInOut></Vue-Animation-MultiElementsModeInOut>
@@ -977,7 +1010,52 @@ export default {
   </code-drawer>
 </ClientOnly>
 
+> `/docs/.vuepress/mixins/MultiElements.js`
+
+```js
+import MultiElementTemplate from "../components/Vue/Animation/MultiElementTemplate.vue";
+export default {
+    components: {MultiElementTemplate},
+    data() {
+        return {
+            docStateList: ['saved', 'edited', 'editing'],
+            docState: 'saved',
+            tempList: [],
+            stateCount: 0
+        }
+    },
+    computed: {
+        buttonMessage: {
+            get: function () {
+                return {
+                    'saved': 'Edit',
+                    'edited': 'Save',
+                    'editing': 'Cancel',
+                }[this.docState]
+            },
+            set: function (state) {
+                this.docState = state
+            }
+        }
+    },
+    beforeMount() {
+        this.tempList = [...this.docStateList]
+    },
+    methods: {
+        switchingDocState() {
+            this.docState = this.tempList.pop();
+            if (this.tempList.length === 0) {
+                this.tempList = [...this.docStateList]
+            }
+        }
+    }
+}
+
+```
+
 ---
+
+> 切换三个元素 `Carousel with no mode`
 
 <ClientOnly>
   <code-drawer infoText="多元素动画" slotName="CSS_MultiElementsCarousel" :resourceCode='`
@@ -1013,7 +1091,15 @@ export default {
 
 ### 多个组件的过渡
 
-- 不需要使用 `key attribute`，使用动态组件
+- 不需要使用 `key attribute`，使用 [动态组件](https://cn.vuejs.org/v2/guide/components.html#%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/) 实现 `<component :is="..."></component>`
+
+```vue
+<transition name="component-fade" mode="out-in">
+  <component :is="view"></component>
+</transition>
+```
+
+> 示例
 
 <ClientOnly>
   <code-drawer infoText="多组件动画" slotName="CSS_MultiComponents" :resourceCode='`
@@ -1071,8 +1157,8 @@ export default {
 </template>
 
 <script>
-import AnimeJS from "./AnimeJS";
-import Slide from "./Slide";
+import AnimeJS from "./AnimeJS.vue";
+import Slide from "./Slide.vue";
 
 export default {
   name: "MultiComponents",
@@ -1127,7 +1213,9 @@ export default {
 
 ::: tip
 
-- 由于循环渲染的多个元素需要放在一个标签中，但是如果直接在`<transition-group></transition-group>`中写一个包裹元素，则子元素不是循环渲染的元素
+- 由于循环渲染的多个元素必须放在一个标签中
+  - 直接在`<transition-group></transition-group>`中写一个包裹元素
+  - 则子元素不是循环渲染的元素，无法识别
 - `vue`使用`tag attribute`，编译时将`<transition-group tag="xxx">`替换为设置的元素名`xxx`
 
 :::
@@ -1209,6 +1297,23 @@ export default {
 </ClientOnly>
 
 ---
+
+::: tip
+
+- 数据`data`里不能循环引用和写入`Vue`实例
+
+```js
+...
+// error
+data() {
+  return {
+    items: [1, 2, 3, 4, 5],
+    nextNum: this.items
+    }
+}
+```
+
+:::
 
 > 解决当 **添加和移除** 元素时 **平滑过渡** 的问题
 
@@ -1306,8 +1411,6 @@ export default {
 
 > 综合示例 使列表的一切变动都会有动画过渡
 
-- 封装了`.../mixins/random.js`的逻辑
-
 <ClientOnly>
   <code-drawer infoText="列表动画" slotName="CSS_ListFlipShuffleMove" :resourceCode='`
 <template>
@@ -1361,9 +1464,50 @@ export default {
   </code-drawer>
 </ClientOnly>
 
+- 封装了`.../mixins/random.js`的逻辑
+
+```js
+export default {
+  methods: {
+    randomIndex() {
+      return Math.floor(Math.random() * this.itemList.length)
+    },
+    add() {
+      this.itemList.splice(this.randomIndex(), 0, this.nextNum++)
+    },
+    remove() {
+      this.itemList.splice(this.randomIndex(), 1)
+    },
+    recover() {
+      this.itemList = [...this.originItems]
+    },
+    oddEven() {
+      ((10 - Math.floor(Math.random() * 10)) % 2 === 0) ?
+        (this.add()) :
+        (this.remove())
+    },
+    checkItemList() {
+      if (this.itemList.length === 0) {
+        this.itemList.push(0)
+        this.recover()
+      }
+    },
+  },
+  watch: {
+    itemList: {
+      handler: 'checkItemList',
+    }
+  },
+  created() {
+    this.originItems = [...this.itemList]
+  },
+}
+
+```
+
 ---
 
-### 列表`<transition-group>`的多维网格过渡
+### 列表`<transition-group>`的多维网格过渡 `Grid`
 
 > 示例
 
@@ -1552,6 +1696,8 @@ export default {
 
 ```
 
+---
+
 ## `<transition>` 或 `<transition-group>`的动态过渡
 
 - 过渡也是数据驱动
@@ -1559,7 +1705,7 @@ export default {
 - 用 Vue 的过渡系统来定义的 CSS 过渡/动画在 不同 **过渡间** 切换
 
 ```vue
-<transition v-bind:name="transitionName">
+<transition :name="transitionName">
   <!-- ... -->
 </transition>
 ```
@@ -1726,10 +1872,6 @@ button {
 
 ## 总结之前的几种动画
 
-- 手动设置持续时间 显性过渡时间
-- 绑定 `:duration`属性
-- `:duration="1000"` `:duration="{enter： 1000, leave: 2000}"`
-
 ---
 
 ## 动画库
@@ -1775,8 +1917,6 @@ export default {
 
 ---
 
----
-
 > 方案导向
 
 ---
@@ -1796,6 +1936,9 @@ export default {
 - [vue中使用animate.css实现动画](https://www.jianshu.com/p/2e0b2f8d40cf/)
 - [5分钟学会Vue动画效果](https://juejin.cn/post/6844903636888207373/)
 - [优美的v-for列表加载动画：vue动画钩子实践](https://juejin.cn/post/6869195042599206919)
+- [4 个 Vue 路由过渡动效](https://juejin.cn/post/6963205355702583303?utm_source=gold_browser_extension)
+- [【Vue学习】关于transition过渡动画的收获](https://juejin.cn/post/6967234534504923172?utm_source=gold_browser_extension/)
+- [饥人谷 【Vue全解】深入讲解 Vue 动画原理 by 方应杭](https://xiedaimala.com/tasks/49deeefb-6561-485f-aa34-07cd33a463e6/)
 
 ---
 ---
