@@ -591,14 +591,31 @@ import 'animate.css'
 <ClientOnly>
   <code-drawer slotName="CSS_AnimateCSS" :resourceCode='`
 <template>
-  <div>
-    <show-panel class="panel"
-                title="Transition"
-                transitionName="fade"
-                showText="Hello">
-    </show-panel>
+  <div class="demoHeight">
+    <show-panel title="AnimateCSS"
+                buttonText="AnimateCSS"
+                showText="AnimateCSS TaDa"
+                animeEnterClassName="animated tada"
+                animeLeaveClassName="animated bounceOutRight"
+                :animationMode="false"
+    ></show-panel>
   </div>
-</template>`'>
+</template>
+<script>
+import ShowPanel from "./ShowPanel.vue"
+import "animate.css"
+export default {
+  name: "AnimateCSS",
+  components: {
+    ShowPanel
+  }
+}
+</script>
+<style scoped>
+.demoHeight {
+  height: 200px;
+}
+</style>`'>
     <template v-slot:CSS_AnimateCSS>
       <Vue-Animation-AnimateCSS></Vue-Animation-AnimateCSS>
     </template>
