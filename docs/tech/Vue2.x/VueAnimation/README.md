@@ -1307,9 +1307,9 @@ export default {
   position: absolute;
 }
 </style>`'>
-  <template v-slot:CSS_ListTransition>
-    <Vue-Animation-ListTransition></Vue-Animation-ListTransition>
-  </template>
+    <template v-slot:CSS_ListTransition>
+      <Vue-Animation-ListTransition></Vue-Animation-ListTransition>
+    </template>
   </code-drawer>
 </ClientOnly>
 
@@ -1685,6 +1685,12 @@ export default {
 
 ---
 
+### 列表动画小结
+
+- [`Vue transition-group API`](https://cn.vuejs.org/v2/api/#transition-group)
+
+---
+
 ## `<transition>` 或 `<transition-group>`的可复用的过渡
 
 > 过渡可以通过 Vue 的组件系统实现复用。要创建一个可复用过渡组件：
@@ -1858,9 +1864,9 @@ button {
   color: #0074d9;
 }
 </style>`'>
-  <template v-slot:CSS_DynamicTransition>
-    <Vue-Animation-DynamicTransition></Vue-Animation-DynamicTransition>
-  </template>
+    <template v-slot:CSS_DynamicTransition>
+      <Vue-Animation-DynamicTransition></Vue-Animation-DynamicTransition>
+    </template>
   </code-drawer>
 </ClientOnly>
 
