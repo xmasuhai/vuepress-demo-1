@@ -573,7 +573,7 @@ yarn add animate.css@3.6.1
 # yarn add animate.css@4.1.1
 ```
 
-> 在入口文件`main.ts`中导入
+> 全局引入：在入口文件`main.ts`中导入 (或者在需要用到的vue组件中局部引入)
 
 ```js
 import 'animate.css'
@@ -1307,9 +1307,9 @@ export default {
   position: absolute;
 }
 </style>`'>
-  <template v-slot:CSS_ListTransition>
-    <Vue-Animation-ListTransition></Vue-Animation-ListTransition>
-  </template>
+    <template v-slot:CSS_ListTransition>
+      <Vue-Animation-ListTransition></Vue-Animation-ListTransition>
+    </template>
   </code-drawer>
 </ClientOnly>
 
@@ -1685,6 +1685,12 @@ export default {
 
 ---
 
+### 列表动画小结
+
+- [`Vue transition-group API`](https://cn.vuejs.org/v2/api/#transition-group)
+
+---
+
 ## `<transition>` 或 `<transition-group>`的可复用的过渡
 
 > 过渡可以通过 Vue 的组件系统实现复用。要创建一个可复用过渡组件：
@@ -1858,30 +1864,15 @@ button {
   color: #0074d9;
 }
 </style>`'>
-  <template v-slot:CSS_DynamicTransition>
-    <Vue-Animation-DynamicTransition></Vue-Animation-DynamicTransition>
-  </template>
+    <template v-slot:CSS_DynamicTransition>
+      <Vue-Animation-DynamicTransition></Vue-Animation-DynamicTransition>
+    </template>
   </code-drawer>
 </ClientOnly>
 
 ---
 
 - 创建动态过渡的最终方案是组件通过接受 props 来动态修改之前的过渡
-
-```HTML
-<transition-group name="fade">
-    <div v-for="c in courses" :key="c.name">
-        {{ c.name }} - ￥{{c.price}} 
-    </div>
-</transition-group>
-<style lang="scss" scoped>
-.fade-enter,.fade-leave-to{
-    opacity: 0;
-}
-.fade-enter-active,.fade-leave-active{
-    transition: opacity 1.5s;
-}
-</style>
 
 ```
 
