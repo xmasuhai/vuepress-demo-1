@@ -29,6 +29,7 @@
 ##### VuePress
 
 - [文章链接](/tech/Vue2.x/VuePress/)
+- [VuePress搭建技术网站遇到的问题](/tech/Vue2.x/VuePress/issues)
 
 ---
 ---
