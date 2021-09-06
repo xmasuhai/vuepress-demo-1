@@ -1,4 +1,5 @@
 ---
+
 home: true
 heroImage: /images/Logo.jpg
 heroText: 我的主页
@@ -13,6 +14,7 @@ features:
 - title: 记录前端学习、踩坑与技术成长
   details: 这只是开始...
 footer: Vue Demo
+
 ---
 
 <Vssue title="First Issue"/>
