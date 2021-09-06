@@ -1,9 +1,11 @@
 ---
+
 title: Vue Animation
 lang: zh-CN
 description: 记录一些 Vue 动画常见用法
 prev: /tech/Vue2.x/VuePress/
 next: /tech/Vue2.x/VuePress/
+
 ---
 
 ## 大纲
